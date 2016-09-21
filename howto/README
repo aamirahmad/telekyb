@@ -1,0 +1,24 @@
+
+x86/64
+
+1. Clone the repository inside src of any catkin workspace and add export TELEKYB=<location>.
+2. Install dependencies '' sudo apt-get install ros-indigo-ecl ros-indigo-orocos ros-indigo-geomtery ros-indigo-mav-msgs ros-indigo-cmake-modules ros-indigo-ompl ros-indigo-octomap ros-indigo-octomap-ros ros-indigo-pcl-ros ros-indigo-image-transport ros-indigo-driver-base ros-indigo-interactive-markers libeigen3-dev libyaml-cpp-dev ''
+3. Add to bashrc: export ROS_PACKAGE_PATH = $ROS_PACKAGE_PATH:$TELEKYB
+4. Add to bashrc: export TELEKYB_CMAKE_SCRIPTS_DIR = $TELEKYB/cmake_scripts
+5. Extract gazebo_simulator folder.
+6. Run ./build.sh in $TELEKYB/external_libraries/Vicon* folder.
+7. Add to bashrc: export ViconDataStreamSDKCPP_ROOT=$TELEKYB/external_libraries/ViconDataStream_SDK
+8. Go to catkin workspace root and run catkin_make.
+
+
+ARM v7
+
+1. Clone the repository inside src of any catkin workspace and add export TELEKYB=<location>.
+2. Install dependencies '' sudo apt-get install ros-indigo-eigen-conversions ros-indigo-tf-conversions ros-indigo-gazebo-msgs ros-indigo-ecl ros-indigo-orocos ros-indigo-geomtery ros-indigo-mav-msgs ros-indigo-cmake-modules ros-indigo-ompl ros-indigo-octomap ros-indigo-octomap-ros ros-indigo-pcl-ros ros-indigo-image-transport ros-indigo-driver-base ros-indigo-interactive-markers libeigen3-dev libyaml-cpp-dev clang-3.5 ''
+3. Add to bashrc: export ROS_PACKAGE_PATH = $ROS_PACKAGE_PATH:$TELEKYB
+4. Add to bashrc: export TELEKYB_CMAKE_SCRIPTS_DIR = $TELEKYB/cmake_scripts
+5. Extract gazebo_simulator folder.
+6. Go to catkin workspace root and run catkin_make -DCATKIN_BLACKLIST_PACKAGES="telekyb_vicon;tk_exp_lagadic_sky_lab;hector_gazebo_thermal_camera;hector_gazebo_plugins;mav_gazebo_plugins;tk_bagtools;tker_teleop;tk_modelga;tker_ompl_pathplanner;tker_obstacleavoidance"
+
+
+

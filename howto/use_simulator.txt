@@ -1,0 +1,5 @@
+$ cd ~/telekyb_ws/src
+$ tar -zxvf gazebo_simulator.tar.gz
+$ cd ..
+$ catkin_make
+$ roslaunch euroc_simulation_server t3_1.launch

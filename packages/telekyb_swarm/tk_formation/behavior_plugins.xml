@@ -1,0 +1,10 @@
+<library path="lib/libtk_form_behaviors">
+  <!-- Formation Behavior -->
+  <class name="tk_formation/Formation" type="telekyb_behavior::Formation" base_class_type="telekyb::Behavior">
+    <description>Formation for a single QC.</description>
+  </class>
+  <!-- FormationReconfiguration Behavior -->
+  <class name="tk_formation/FormationReconfiguration" type="telekyb_behavior::FormationReconfiguration" base_class_type="telekyb::Behavior">
+    <description>Reconfigure Formation</description>
+  </class>
+</library>

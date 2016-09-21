@@ -1,0 +1,34 @@
+<package>
+  <name>telekyb_haptics</name>
+  <version>3.0.0</version>
+  <description>telekyb_haptics contains packages concerning haptic devices</description>
+  <maintainer email="eugen.ruff@tuebingen.mpg.de">Eugen Ruff</maintainer>
+
+  <license>BSD</license>
+
+  <url type="website">http://ros.org/wiki/telekyb_haptics</url>
+  <!-- <url type="bugtracker"></url> -->
+
+  <author>Maintained by Martin Riedel.</author>
+
+  <!-- Dependencies which this package needs to build itself. -->
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <!-- Dependencies needed to compile this package. -->
+
+
+  <!-- Dependencies needed after this package is compiled. -->
+  <run_depend>tk_haptics_msgs</run_depend>
+  <run_depend>tk_haptics_base</run_depend>
+
+  <!-- Dependencies needed only for running tests. -->
+
+<!-- Is metapackage. -->
+	<export>
+		<metapackage />
+	</export>
+
+
+
+
+</package>

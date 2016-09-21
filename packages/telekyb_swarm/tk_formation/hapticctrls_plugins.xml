@@ -1,0 +1,6 @@
+<library path="lib/libhaptic_controllers">
+  <!-- HapticFormationController -->
+  <class name="tk_formation/HapticFormationController" type="telekyb_haptic::HapticFormationController" base_class_type="telekyb::HapticDeviceController">
+    <description>Haptic Formation Controller</description>
+  </class>
+</library>

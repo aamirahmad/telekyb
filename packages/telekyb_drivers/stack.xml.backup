@@ -1,0 +1,11 @@
+<stack>
+  <description brief="telekyb_drivers">telekyb_drivers</description>
+  <author>Maintained by Dr. Antonio Franchi and Martin Riedel</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/telekyb_drivers</url>
+  <depend stack="ros" />
+  <depend stack="ros_comm" /> <!-- roscpp -->
+  <depend stack="telekyb_deps" /> <!-- dhd_wrapper -->
+
+</stack>

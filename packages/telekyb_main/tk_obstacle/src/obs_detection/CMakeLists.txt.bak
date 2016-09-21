@@ -1,0 +1,10 @@
+# Obstacle Detection. Library for publishing Obstaclepoints
+
+set(ObsDetectionSRCS
+	ObstacleProvider.cpp
+	ObstacleProviderContainer.cpp
+	ObstacleProviderController.cpp
+	ObstacleProviderControllerOptions.cpp
+)
+
+rosbuild_add_library(obs_detection ${ObsDetectionSRCS})

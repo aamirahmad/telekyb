@@ -1,0 +1,6 @@
+<library path="lib/libbe_mk_tools">
+  <!-- Calibrator Behavior -->
+  <class type="telekyb_behavior::Calibrator" base_class_type="telekyb::Behavior">
+    <description>Calibrator Behavior. Calibrates the UAV</description>
+  </class>
+</library>

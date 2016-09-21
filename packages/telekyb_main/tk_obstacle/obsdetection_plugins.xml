@@ -1,0 +1,28 @@
+<library path="lib/libobstacle_providers">
+  <!-- SurroundingBox Obstacle Provider -->
+  <class name="tk_obstacle/SurroundingBox" type="telekyb_obs::SurroundingBox" base_class_type="telekyb::ObstacleProvider">
+    <description>SurroundingBox. Defines a box outside the UAV.</description>
+  </class>
+  <!-- ConstantPoints Obstacle Provider -->
+  <class name="tk_obstacle/ConstantPoints" type="telekyb_obs::ConstantPoints" base_class_type="telekyb::ObstacleProvider">
+    <description>ConstantPoints. Defines a list of Constant Obstacle Points.</description>
+  </class>
+  <!-- ExternalObsPoint Obstacle Provider -->
+  <class name="tk_obstacle/ExternalObsPoint" type="telekyb_obs::ExternalObsPoint" base_class_type="telekyb::ObstacleProvider">
+    <description>ExternalObsPoint. Extract Point From TransformStamped.</description>
+  </class>
+  <!-- ExternalBox Obstacle Provider -->
+  <class name="tk_obstacle/ExternalBox" type="telekyb_obs::ExternalBox" base_class_type="telekyb::ObstacleProvider">
+    <description>ExternalBox. Extract Point From ExternalBox.</description>
+  </class>
+ <!-- ExternalFace Obstacle Provider -->
+  <class name="tk_obstacle/ExternalFace" type="telekyb_obs::ExternalFace" base_class_type="telekyb::ObstacleProvider">
+    <description>ExternalFace. Extract Point From ExternalFace.</description>
+  </class>
+ <!-- Octomap Obstacle Provider -->
+  <class name="tk_obstacle/Octomap" type="telekyb_obs::Octomap" base_class_type="telekyb::ObstacleProvider">
+    <description>Octomap. Extract Point From Octomap.</description>
+  </class>
+</library>
+
+

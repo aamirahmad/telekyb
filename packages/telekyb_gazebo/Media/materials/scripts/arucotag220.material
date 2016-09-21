@@ -1,0 +1,15 @@
+material arucotag220
+{
+  receive_shadows on
+  technique
+  {
+    pass
+    {
+      ambient 1.0 1.0 1.0 1.000000
+      texture_unit
+      {
+        texture arucotag220.png
+      }
+    }
+  }
+}

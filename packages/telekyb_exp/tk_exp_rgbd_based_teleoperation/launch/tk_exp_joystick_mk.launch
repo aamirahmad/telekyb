@@ -1,0 +1,70 @@
+
+<launch>
+	<arg name="qcID" value="3" />
+	<arg name="firmware" value="1437" />
+	<arg name="rotortype" value="Quadcopter" />
+
+	<!-- Vicon -->
+	<node name="Vicon" pkg="vicon_bridge" type="vicon_bridge">
+	      <param name="datastream_hostport" value="192.168.111.100:801" />
+	</node>
+
+	<!-- Joystick Logitech 510 Remapping -->
+	<node name="Joystick_$(arg qcID)" pkg="telekyb_joystick" type="tJoy">
+	      <param name="JoystickOptions/tDevicePath" value="/dev/input/js0" />
+	      <param name="JoystickOptions/tPubName" value="joy_exp" />
+	      <param name="JoystickOptions/tButtonRemapping" value="[4,1,2,3,0,5,7,8,6]" />
+	      <param name="JoystickOptions/tAxesRemapping" value="[5,2,3,1,0,4]" />
+	      <param name="JoystickOptions/tAxisMultiplier" value="[-1.0,1.0,-1.0,1.0,1.0]" />
+	</node>
+
+	<node name="TeleKybSystem_$(arg qcID)" pkg="telekyb" type="telekyb_system">
+	      <param name="TeleKybSystem/tRobotID" value="$(arg qcID)" />
+	      <param name="StateEstimatorController/tPluginLookupName" value="tk_state/ViconStateEstimator"/>
+	      <param name="StateEstimatorController/tPublishRosTransform" value="true"/>
+	      <param name="ViconStateEstimator/tViconSeTopicName" value="/vicon/$(arg rotortype)_$(arg qcID)/$(arg rotortype)_$(arg qcID)" />
+	      <param name="TrajectoryController/tCommandsTopic" value="/TeleKyb/$(arg qcID)/commands" />
+	      <param name="TrajectoryController/tInitialMass" value="0.75"/>
+	      <param name="PositionControl/tDerGainVelMode" value="7.5" />
+	      <param name="TrajectoryProcessorController/tTrajectoryModules" 
+	      	     value='
+		     ["tk_trajprocessor/PMPositionError",
+		     "tk_trajprocessor/PMObsAvoid", 
+		     "tk_trajprocessor/VMSaturation",
+		     "tk_trajprocessor/XMModeCheck", 
+		     "tk_trajprocessor/VMObsAvoid" ]
+		     '/>
+		<!--param name="TrajectoryProcessorController/tTrajectoryModules"
+	      	     value='
+		     [ ]
+		     '/-->
+	      <param name="tObsPointsTopicName" value="/TeleKyb/Obstacle_$(arg qcID)/ObstaclePoints"/>
+	      <param name="tJoystickUsePositionMode" value="true"/>
+	</node>
+
+	<!-- Obstacle Provider -->
+	<node name="Obstacle_$(arg qcID)" pkg="tk_obstacle" type="obstacle_provider">
+	      <param name="ObstacleProviderController/tObstacleProviders" value='[ "tk_obstacle/SurroundingBox" ] '/>
+	      <param name="ObstacleProviderController/tTKStateTopicName" value="/TeleKyb/TeleKybSystem_$(arg qcID)/Sensor/TKState" />
+	      <param name="SurroundingBox/tMinSurrObsBox" value="[-7.0,-4.0,-3.0]"/>
+	      <param name="SurroundingBox/tMaxSurrObsBox" value="[7.0,7.0,0.2]"/>
+	</node>	
+
+	<!-- MK -->
+	<node name="MKInterface_$(arg qcID)" pkg="tk_mkinterface" type="mkinterface">
+	      <param name="MKInterface/tUavId" value="$(arg qcID)" />
+	      <param name="MKInterface/tUavFirmware" value="$(arg firmware)" />
+	      <param name="MKInterface/tInitialDriftEstim" value="true" />
+	      <param name="MKInterfaceConnection/tBaudRate" value="BAUD115200" />
+	      <param name="MKROSInterface/tCommandsTopic" value="/TeleKyb/$(arg qcID)/commands" />
+	      <param name="MKROSInterface/tEmergencyLandService" value="/TeleKyb/TeleKybSystem_$(arg qcID)/Behavior/EmergencyLand"/>
+	</node>
+
+	<!-- Experiment -->
+	<node name="tk_exp_joystick" pkg="tk_exp_joystick" type="tk_exp_joystick">
+	      <param name="ExperimentOptions/robotID" value="$(arg qcID)" />
+	      <param name="ExperimentOptions/tJoystickTopic" value="/TeleKyb/tJoy/joy_exp" />
+	      <param name="ExperimentOptions/tUseMKInterface" value="true" />
+	</node>
+
+</launch>

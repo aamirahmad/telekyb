@@ -1,0 +1,45 @@
+<package>
+  <name>telekyb_interface</name>
+  <version>1.0.0</version>
+  <description>telekyb_interface is a library that abstract the communication to the telekyb_system. It intentionally has almost
+     no external dependecies, since it needs to be very portable. (e.g. iPad). Perhaps there will be one "lite" and one "normal"
+     Version.</description>
+  <maintainer email="martin.riedel@tuebingen.mpg.de">Martin Riedel</maintainer>
+
+  <license>BSD</license>
+
+  <url type="website">http://ros.org/wiki/telekyb_interface</url>
+  
+
+  <author>Martin Riedel</author>
+
+  
+  <buildtool_depend>catkin</buildtool_depend>
+
+  
+  <build_depend>roscpp</build_depend>
+  <build_depend>telekyb_defines</build_depend>
+  <build_depend>telekyb_msgs</build_depend>
+  <build_depend>telekyb_srvs</build_depend>
+  <build_depend>telekyb_base</build_depend>
+  <build_depend>cmake_modules</build_depend>
+
+  
+  <run_depend>roscpp</run_depend>
+  <run_depend>telekyb_defines</run_depend>
+  <run_depend>telekyb_msgs</run_depend>
+  <run_depend>telekyb_srvs</run_depend>
+  <run_depend>telekyb_base</run_depend>
+
+  
+  
+  
+  
+  
+  
+
+<export>
+    <cpp cflags="-I${prefix}/include" lflags="-Wl,-rpath,${prefix}/lib -L${prefix}/lib -ltelekyb_interface" />
+</export>
+
+<!--This file was altered by an automated script. Trying to alter xml files to fullfill the requirements for the catkin hydro standart in ros. This means there maight be some tags which do not make sense I did my best to guess the correct answers.  --></package>

@@ -1,0 +1,17 @@
+config/joysticks.yaml
+include/telekyb_hid/HIDDevice.hpp
+include/telekyb_hid/Joystick.hpp
+include/telekyb_hid/JoystickConfig.hpp
+include/telekyb_hid/JoystickOptions.hpp
+src/HIDDevice.cpp
+src/hidtest.cpp
+src/joy.cpp
+src/joyconfig.cpp
+src/Joystick.cpp
+src/JoystickConfig.cpp
+src/JoystickOptions.cpp
+CMakeLists.txt
+CMakeLists.txt.backup
+mainpage.dox
+manifest.xml.backup
+package.xml

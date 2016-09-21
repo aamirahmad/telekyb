@@ -1,0 +1,26 @@
+<package>
+  <name>telekyb_algo</name>
+  <version>3.0.0</version>
+  <description>telekyb_algo</description>
+  <maintainer email="martin.riedel@tuebingen.mpg.de">Maintained by Martin Riedel</maintainer>
+
+  <license>BSD</license>
+
+  <url type="website">http://ros.org/wiki/telekyb_algo</url>
+  
+
+  <author>Maintained by Martin Riedel</author>
+
+  
+  <buildtool_depend>catkin</buildtool_depend>
+
+  
+  <run_depend>tk_ctrlalgo</run_depend>
+  <run_depend>telekyb_calculus</run_depend>
+  <run_depend>tk_param_estimator</run_depend>
+
+
+ <export>
+   <metapackage />
+ </export>
+</package>

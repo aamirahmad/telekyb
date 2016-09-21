@@ -1,0 +1,39 @@
+<!-- -->
+
+<launch>
+
+	<!-- Joystick Logitech 510 Remapping -->
+	<node name="Joystick_0" pkg="telekyb_joystick" type="tJoy_node">
+	      <param name="JoystickOptions/tDevicePath" value="/dev/input/js0" />
+	      <param name="JoystickOptions/tPubName" value="joy_exp" />
+	      <param name="JoystickOptions/tPublishVector3" value="true" />
+	      <param name="JoystickOptions/tButtonRemapping" value="[4,1,2,3,0,5,7,8,6]" />
+	      <param name="JoystickOptions/tAxesRemapping" value="[5,2,3,1,0,4]" />
+	      <param name="JoystickOptions/tAxisMultiplier" value="[-0.8,0.8,-0.8,1.0,1.0]" />
+	</node>
+
+
+	<!-- Quadcopters -->	
+	<include file="$(find tk_standard_demo)/launch/includes/UAV_gazebo.launch">
+		<arg name="qcID" value="1" />
+		<arg name="firmware" value="1641" />
+		<arg name="rotortype" value="Quadcopter" />
+		<arg name="rawAccOffsetX" value="516" />
+		<arg name="rawAccOffsetY" value="499" />
+		<arg name="landHeight" value="-0.25" />
+		<arg name="initialMass" value="0.80" />
+		<arg name="takeOffHeight" value="1.00" />
+	</include>
+
+
+	<node name="standard_demo" pkg="tk_standard_demo" type="tk_standard_demo">
+	  <param name="FormationControlOptions/tRobotIDs" value="[1]" />
+		<param name="FormationControlOptions/tUsesHumanInput" value="[1]" />    	
+		<param name="FormationControlOptions/tJoystickTopic" value="/TeleKyb/tJoy/joy_exp" />
+	      	<param name="FormationControlOptions/tVelocityInputTopic" value="/TeleKyb/tJoy/joy_exp_vector3" />
+	      	<param name="FormationControlOptions/tUseMKInterface" value="false" />
+		<!--param name="Common/tPrintOptions" value="true"/-->
+	</node>
+	
+	
+</launch>

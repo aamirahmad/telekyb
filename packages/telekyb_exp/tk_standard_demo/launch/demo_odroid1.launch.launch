@@ -1,0 +1,21 @@
+<!-- -->
+
+<launch>
+
+
+
+	<!-- Quadcopters -->	
+	<include file="$(find tk_standard_demo)/launch/includes/UAV_gazebo.launch">
+		<arg name="qcID" value="1" />
+		<arg name="firmware" value="1641" />
+		<arg name="rotortype" value="Quadcopter" />
+		<arg name="rawAccOffsetX" value="516" />
+		<arg name="rawAccOffsetY" value="499" />
+		<arg name="landHeight" value="-0.25" />
+		<arg name="initialMass" value="0.80" />
+		<arg name="takeOffHeight" value="1.00" />
+	</include>
+	
+	
+	
+</launch>

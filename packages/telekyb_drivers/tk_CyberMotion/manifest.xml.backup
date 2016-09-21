@@ -1,0 +1,17 @@
+<package>
+  <description brief="tk_CyberMotion">
+
+     tk_CyberMotion
+
+  </description>
+  <author>Johannes Laechele</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/tk_CyberMotion</url>
+  <depend package="roscpp"/>
+  <depend package="sensor_msgs"/>
+  <depend package="telekyb_base"/>
+
+</package>
+
+

@@ -1,0 +1,6 @@
+<library path="lib/libhaptic_controllers">
+  <!-- SampleController -->
+  <class name="tk_haptics_base/SampleController" type="telekyb_haptic::SampleController" base_class_type="telekyb::HapticDeviceController">
+    <description>Sample Controller</description>
+  </class>
+</library>

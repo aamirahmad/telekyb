@@ -1,0 +1,71 @@
+---
+name: Logitech Rumblepad 2 USB
+vendor-id: 1133
+product-id: 49688
+defaultByte: [0x80, 0x7f, 0x80, 0x7f, 0x08, 0x00, 0x00, 0xff]
+axes:
+  - {name: left-right (left-stick), min: 0, max: 255, pos: 0}
+  - {name: up-down (left-stick), min: 0, max: 255, pos: 1}
+  - {name: left-right (right-stick), min: 0, max: 255, pos: 2}
+  - {name: up-down (left-stick), min: 0, max: 255, pos: 3}
+buttons:
+  - {name: green, pos: 4, value: 0x20, mask: 0x20}
+  - {name: red, pos: 4, value: 0x40, mask: 0x40}
+  - {name: blue, pos: 4, value: 0x10, mask: 0x10}
+  - {name: yellow, pos: 4, value: 0x80, mask: 0x80}
+  - {name: left-upper-back, pos: 5, value: 0x01, mask: 0x01}
+  - {name: right-upper-back, pos: 5, value: 0x02, mask: 0x02}
+  - {name: left-lower-back, pos: 5, value: 0x04, mask: 0x04}
+  - {name: right-lower-back, pos: 5, value: 0x08, mask: 0x08}
+  - {name: back, pos: 5, value: 0x10, mask: 0x10}
+  - {name: start, pos: 5, value: 0x20, mask: 0x20}
+  - {name: left-analog-button, pos: 5, value: 0x40, mask: 0x40}
+  - {name: right-analog-button, pos: 5, value: 0x80, mask: 0x80}
+  - {name: DPad-left, pos: 4, value: 0x0e, mask: 0x0f}
+  - {name: DPad-right, pos: 4, value: 0x0a, mask: 0x0f}
+  - {name: DPad-up, pos: 4, value: 0x08, mask: 0x0f}
+  - {name: DPad-down, pos: 4, value: 0x0c, mask: 0x0f}
+---
+name: PS3 SixAxis Controller
+vendor-id: 1356
+product-id: 616
+defaultByte: [0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x80, 0x80, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 0x05, 0x16, 0xff, 0xca, 0x00, 0x00, 0x33, 0x2f, 0x77, 0x01, 0xc0, 0x02, 0x08, 0x01, 0xf4, 0x01, 0x8d, 0x00, 0x05]
+axes:
+  - {name: left-right (left-stick), min: 0, max: 255, pos: 6}
+  - {name: up-down (left-stick), min: 0, max: 255, pos: 7}
+  - {name: left-right (right-stick), min: 0, max: 255, pos: 8}
+  - {name: up-down (left-stick), min: 0, max: 255, pos: 9}
+#  - {name: Triangle, min: 255, max: 0, pos: 22}
+#  - {name: Circle, min: 255, max: 0, pos: 23}
+#  - {name: X, min: 255, max: 0, pos: 24}
+#  - {name: Square, min: 255, max: 0, pos: 25}
+  - {name: left-lower-back, min: 255, max: 0, pos: 18}
+  - {name: right-lower-back, min: 255, max: 0, pos: 19}
+#  - {name: left-upper-back, min: 255, max: 0, pos: 20}
+#  - {name: right-upper-back, min: 255, max: 0, pos: 21}
+  - {name: D-Pad-up, min: 255, max: 0, pos: 14}
+  - {name: D-Pad-right, min: 255, max: 0, pos: 15}
+  - {name: D-Pad-down, min: 255, max: 0, pos: 16}
+  - {name: D-Pad-left, min: 255, max: 0, pos: 17}
+#  - {name: Acc1, min: 0, max: 255, pos: 42}
+#  - {name: Acc2, min: 0, max: 255, pos: 44}
+#  - {name: Acc3, min: 0, max: 255, pos: 46}
+buttons:
+  - {name: Triangle, pos: 3, value: 0x10, mask: 0x10}
+  - {name: Circle, pos: 3, value: 0x20, mask: 0x20}
+  - {name: X, pos: 3, value: 0x40, mask: 0x40}
+  - {name: Square, pos: 3, value: 0x80, mask: 0x80}
+  - {name: left-lower-back, pos: 3, value: 0x01, mask: 0x01}
+  - {name: right-lower-back, pos: 3, value: 0x02, mask: 0x02}
+  - {name: left-upper-back, pos: 3, value: 0x04, mask: 0x04}
+  - {name: right-upper-back, pos: 3, value: 0x08, mask: 0x08}
+  - {name: PS3Button, pos: 4, value: 0x01, mask: 0x01}
+  - {name: Select, pos: 2, value: 0x01, mask: 0x01}
+  - {name: left-analog-button, pos: 2, value: 0x02, mask: 0x02}
+  - {name: right-analog-button, pos: 2, value: 0x04, mask: 0x04}
+  - {name: Start, pos: 2, value: 0x08, mask: 0x08} 
+  - {name: D-Pad-up, pos: 2, value: 0x10, mask: 0x10}
+  - {name: D-Pad-right, pos: 2, value: 0x20, mask: 0x20}
+  - {name: D-Pad-down, pos: 2, value: 0x40, mask: 0x40}
+  - {name: D-Pad-left, pos: 2, value: 0x80, mask: 0x80}
+...

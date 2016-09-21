@@ -1,0 +1,23 @@
+<package>
+  <description brief="tk_mk_tools">
+
+     tk_mk_tools provide tools to automatically configure and calibrate a UAV.
+
+  </description>
+  <author>Martin Riedel</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/tk_mk_tools</url>
+  <depend package="roscpp"/>
+  <depend package="telekyb_base"/>
+  <depend package="telekyb_interface"/>
+  <depend package="tk_behavior"/>
+  <depend package="sensor_msgs"/>
+  
+  <export>
+  	<tk_behavior plugin="${prefix}/behavior_plugins.xml" />
+  </export>
+
+</package>
+
+

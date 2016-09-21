@@ -1,0 +1,27 @@
+<package>
+  <name>tk_haptics_msgs</name>
+  <version>3.0.0</version>
+  <description>tk_haptics_msgs contains messages that are used in the context of haptics.</description>
+  <maintainer email="eugen.ruff@tuebingen.mpg.de">Eugen Ruff</maintainer>
+
+  <license>BSD</license>
+
+  <url type="website">http://ros.org/wiki/tk_haptics_msgs</url>
+  <!-- <url type="bugtracker"></url> -->
+
+  <author>Martin Riedel</author>
+
+  <!-- Dependencies which this package needs to build itself. -->
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <!-- Dependencies needed to compile this package. -->
+  <build_depend>telekyb_msgs</build_depend>
+  <build_depend>message_generation</build_depend>
+
+  <!-- Dependencies needed after this package is compiled. -->
+  <run_depend>telekyb_msgs</run_depend>
+  <run_depend>message_runtime</run_depend> 
+  <!-- Dependencies needed only for running tests. -->
+  <!-- <test_depend>telekyb_msgs</test_depend> -->
+
+</package>

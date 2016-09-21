@@ -1,0 +1,34 @@
+<library path="lib/libtrajectory_modules">
+  <!-- PM Position Error -->
+  <class name="tk_trajprocessor/PMPositionError" type="telekyb_traj::PMPositionError" base_class_type="telekyb::TrajectoryModule">
+    <description>Position Error Module. Switches to NormalBrake if Positionerror gets too big.</description>
+  </class>
+  <!-- PM Obstacle Avoidance -->
+  <class name="tk_trajprocessor/PMObsAvoid" type="telekyb_traj::PMObsAvoid" base_class_type="telekyb::TrajectoryModule">
+    <description>Position Mode: Obstacle Avoidance Module. Requires Obstacle Points Topic.</description>
+  </class>
+  <!-- PM Trajectory Smoothing -->
+  <class name="tk_trajprocessor/PMTrajectorySmoothing" type="telekyb_traj::PMTrajectorySmoothing" base_class_type="telekyb::TrajectoryModule">
+    <description>Position Mode: Generate continuous jerk trajectories.</description>
+  </class>
+  <!-- VM Trajectory Smoothing -->
+  <class name="tk_trajprocessor/VMTrajectorySmoothing" type="telekyb_traj::VMTrajectorySmoothing" base_class_type="telekyb::TrajectoryModule">
+    <description>Velocity Mode: Generate continuous jerk trajectories.</description>
+  </class>
+  <!-- AM Trajectory Smoothing -->
+  <class name="tk_trajprocessor/AMTrajectorySmoothing" type="telekyb_traj::AMTrajectorySmoothing" base_class_type="telekyb::TrajectoryModule">
+    <description>Acceleration Mode: Generate continuous jerk trajectories.</description>
+  </class>
+  <!-- VM Saturation -->
+  <class name="tk_trajprocessor/VMSaturation" type="telekyb_traj::VMSaturation" base_class_type="telekyb::TrajectoryModule">
+    <description>Velocity Mode: Saturates Input Velocity.</description>
+  </class>
+  <!-- VM Obstacle Avoidance -->
+  <class name="tk_trajprocessor/VMObsAvoid" type="telekyb_traj::VMObsAvoid" base_class_type="telekyb::TrajectoryModule">
+    <description>Velocity Mode: Obstacle Avoidance Module. Requires Obstacle Points Topic.</description>
+  </class>
+  <!-- XM ModeCheck -->
+  <class name="tk_trajprocessor/XMModeCheck" type="telekyb_traj::XMModeCheck" base_class_type="telekyb::TrajectoryModule">
+    <description>All Modes: Test for allowed input modes. Otherwise break.</description>
+  </class>
+</library>

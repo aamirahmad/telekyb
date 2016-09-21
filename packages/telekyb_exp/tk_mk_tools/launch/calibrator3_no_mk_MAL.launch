@@ -1,0 +1,69 @@
+<!-- -->
+
+<launch>
+	<arg name="qcID" value="3" /> <!-- small ones have land height -0.25, mass 0.8 and emergency thrust 60, bigger ones -0.37, 1.1 and 70 -->
+	<arg name="firmware" value="4102" /> <!--old version: 1641, smurf: 3263-->
+	<arg name="rotortype" value="Quadcopter" />
+		<arg name="takeOffHeight" value="-1" />
+		<arg name="landHeight" value="-0.25" />
+		<arg name="initialMass" value="0.8" />
+		<arg name="emergencyThrust" value="70" />
+
+
+
+	<node name="TeleKybCore_$(arg qcID)" pkg="telekyb_core" type="telekyb_core_node">
+	      <param name="TeleKybCore/tRobotID" value="$(arg qcID)" />
+	      <param name="StateEstimatorController/tPluginLookupName" value="state_estimators_plugin::ViconStateEstimator"/>
+	      <param name="StateEstimatorController/tPublishRosTransform" value="false"/>
+	      <param name="ViconStateEstimator/tViconSeTopicName" value="/TeleKyb/Vicon/$(arg rotortype)_$(arg qcID)/$(arg rotortype)_$(arg qcID)" />
+	      <param name="StandardTrajectoryTracker/tCommandsTopic" value="/TeleKyb/$(arg qcID)/commands" />
+
+		<!-- pos control gains -->
+		<param name="PositionControl/tPropGain" value="6.5" />
+		<param name="PositionControl/tXPropGain" value="1.0" />
+		<param name="PositionControl/tYPropGain" value="1.0" />
+
+		<param name="PositionControl/tDerivGain" value="5.5" />
+		<param name="PositionControl/tXDerivGain" value="1.0" />
+		<param name="PositionControl/tYDerivGain" value="1.0" />
+
+		<param name="PositionControl/tIntegGain" value="3.0" />
+		<param name="PositionControl/tXIntegGain" value="1.0" />
+		<param name="PositionControl/tYIntegGain" value="1.0" />
+
+		<param name="PositionControl/tZIntegGain" value="0.0" />
+		<param name="PositionControl/tZPropGain" value="9.0" />
+		<param name="PositionControl/tZDerivGain" value="7.5" />
+
+		<param name="PositionControl/tSatIntTerm" value="0.475" />
+
+		<!-- vel control gains -->
+		<param name="PositionControl/tIntegVelGain" value="0.2" />
+		<param name="PositionControl/tDerGainVelMode" value="4.5" />
+
+		<param name="PositionControl/tSatIntVelTerm" value="1.0" />
+		
+		<!-- other parameters for the controller -->
+		<param name="PositionControl/tGravity" value="9.8" />
+
+
+	      <param name="TrajectoryProcessorController/tTrajectoryModules" value='[]'/>
+	      <param name="StandardMassEstim/tInitialMass" value="0.70"/>
+              <param name="tCenterValueX" value="512" />
+	      <param name="tCenterValueY" value="512" />
+	      <param name="StandardMassEstim/tInitialMass" value="$(arg initialMass)"/>
+	      <param name="tTakeOffDestination" value="[0.2, -2.0, $(arg takeOffHeight)]"/>
+	      <param name="tLandDestinationHeight" value="$(arg landHeight)" />
+	</node>
+
+
+
+
+	<!-- Experiment -->
+	<node name="tk_calibrator" pkg="tk_mk_tools" type="tk_calibrator">
+	      <param name="CalibratorOptions/robotID" value="$(arg qcID)" />
+	      <param name="CalibratorOptions/tJoystickTopic" value="/TeleKyb/tJoy/joy_exp" />
+	      <param name="CalibratorOptions/tUseMKInterface" value="true" />
+	</node>
+
+</launch>

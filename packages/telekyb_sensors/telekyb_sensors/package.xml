@@ -1,0 +1,27 @@
+<package>
+  <name>telekyb_sensors</name>
+  <version>3.0.0</version>
+  <description>telekyb_sensors</description>
+  <maintainer email="paolo.stegagno@tuebingen.mpg.de">Maintained by Martin Riedel</maintainer>
+
+  <license>BSD</license>
+
+  <url type="website">http://ros.org/wiki/telekyb_algo</url>
+  
+
+  <author>Maintained by Paolo Stegagno</author>
+
+  
+  <buildtool_depend>catkin</buildtool_depend>
+
+  
+  <run_depend>telekyb_vicon_emulator</run_depend>
+  <run_depend>telekyb_vicon</run_depend>
+  <run_depend>telekyb_vrpn</run_depend>
+  <run_depend>telekyb_gps</run_depend>
+
+
+ <export>
+   <metapackage />
+ </export>
+</package>

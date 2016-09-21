@@ -1,0 +1,45 @@
+<package>
+  <name>tk_parameter_estimators</name>
+  <version>1.0.0</version>
+  <description>tk_param_estimator. Contains Interface Definitions for various parameter estimations. e.g. mass estimation or inertia matrix estimation</description>
+  <maintainer email="johannes.laechele@tuebingen.mpg.de">Johannes Laechele</maintainer>
+
+  <license>BSD</license>
+
+  <url type="website">http://ros.org/wiki/tk_param_estimator</url>
+  
+
+  <author>Riccardo Spica and Martin Riedel</author>
+
+  
+  <buildtool_depend>catkin</buildtool_depend>
+
+  
+  <build_depend>roscpp</build_depend>
+  <build_depend>telekyb_defines</build_depend>
+  <build_depend>telekyb_base</build_depend>
+  <build_depend>tk_draft_msgs</build_depend>
+  <build_depend>pluginlib</build_depend>
+  <build_depend>cmake_modules</build_depend>
+  <build_depend>tk_param_estimator</build_depend>
+
+  
+  <run_depend>roscpp</run_depend>
+  <run_depend>telekyb_defines</run_depend>
+  <run_depend>telekyb_base</run_depend>
+  <run_depend>tk_draft_msgs</run_depend>
+  <run_depend>pluginlib</run_depend>
+  <run_depend>tk_param_estimator</run_depend>
+
+  
+  
+  
+  
+  
+  
+
+<export>
+    <tk_param_estimator plugin="${prefix}/param_estim_plugins.xml" />
+</export>
+
+<!--This file was altered by an automated script. Trying to alter xml files to fullfill the requirements for the catkin hydro standart in ros. This means there maight be some tags which do not make sense I did my best to guess the correct answers.  --></package>

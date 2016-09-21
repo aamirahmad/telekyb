@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<robot 
+  name="qc13"
+  xmlns:xacro="http://ros.org/wiki/xacro"
+>
+  <link name="base_link">
+     <inertial>
+      <mass value="0.1" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <inertia ixx="0.001" ixy="0.001" ixz="0.001" iyy="0.001" iyz="0.001" izz="0.001" />
+    </inertial>
+
+    <visual name="arm1">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.8 0.02 0.02" />
+      </geometry>
+    </visual>
+    <collision name="arm1">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.8 0.02 0.02" />
+      </geometry>
+    </collision>
+    
+    <visual name="arm2">
+      <origin xyz="0 0 0" rpy="0 0 1.570796" />
+      <geometry>
+        <box size="0.8 0.02 0.02" />
+      </geometry>
+    </visual>
+    <collision name="arm2">
+      <origin xyz="0 0 0" rpy="0 0 1.570796" />
+      <geometry>
+        <box size="0.8 0.02 0.02" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <!-- Asus Xiton Live Pro -->
+  <xacro:include filename="qc13_xtion_aruco.urdf.xacro" />
+  <xacro:asus_camera name="camera" parent="base_link">
+    <origin xyz="0.044 -0.044 -0.01" rpy="-1.6232 0.3927 -0.7854"/>
+  </xacro:asus_camera>
+
+  <!-- Gazebo ROS IMU -->
+  <xacro:include filename="qc13_aruco_sensors.urdf.xacro" />
+
+</robot>

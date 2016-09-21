@@ -1,0 +1,92 @@
+<!-- -->
+
+<launch>
+	<!-- REQUIED by mk_interface -->
+	<arg name="qcID" value="9" />
+	<arg name="firmware" value="4102" />
+	<arg name="serial_device1" value="usb-FTDI_FT232R_USB_UART_A900fRxi-if00-port0" />
+
+
+	<!-- REQUIED by telekyb_core -->
+	<arg name="rotortype" value="Quadcopter" />
+	<arg name="takeOffHeight" value="-1.0" />
+	<arg name="landHeight" value="-0.3" />
+	<arg name="initialMass" value="0.9" />
+	<arg name="emergencyThrust" value="60" />
+
+
+	<!-- Joystick Logitech 510 Remapping -->
+	<node name="Joystick_$(arg qcID)" pkg="telekyb_joystick" type="tJoy_node">
+	      <param name="JoystickOptions/tDevicePath" value="/dev/input/js0" />
+	      <param name="JoystickOptions/tPubName" value="joy_exp" />
+	      <param name="JoystickOptions/tPublishVector3" value="true" />
+	      <param name="JoystickOptions/tButtonRemapping" value="[4,1,2,3,0,5,7,8,6]" />
+	      <param name="JoystickOptions/tAxesRemapping" value="[5,2,3,1,0,4]" />
+	      <param name="JoystickOptions/tAxisMultiplier" value="[-0.8,0.8,-0.8,1.0,1.0]" />
+	</node>
+
+
+	<!-- Vicon -->
+	<node name="Vicon" pkg="telekyb_vicon" type="telekyb_vicon">
+	      <param name="ViconTracker/tTrackerHostname" value="192.168.111.100:801" />
+	</node>
+
+
+	<!-- telekyb core  -->
+	<node name="TeleKybCore_$(arg qcID)" pkg="telekyb_core" type="telekyb_core_node">
+		<param name="TeleKybCore/tRobotID" value="$(arg qcID)" />
+		<param name="StateEstimatorController/tPluginLookupName" value="state_estimators_plugin::ViconStateEstimator"/>
+	    	<param name="StateEstimatorController/tPublishRosTransform" value="false"/>
+	    	<param name="ViconStateEstimator/tViconSeTopicName" value="/TeleKyb/Vicon/$(arg rotortype)_$(arg qcID)/$(arg rotortype)_$(arg qcID)" />
+	   	<param name="ViconStateEstimator/tViconPublishSmoothVel" value="true" />
+		
+		<param name="TrajectoryController/tPluginLookupName" value="trajectory_trackers_plugin::PositionForceTrajectoryTracker"/>
+		<param name="PositionForceTrajectoryTracker/tCommandsTopic" value="/TeleKyb/$(arg qcID)/commands" />
+		
+		<param name="StandardMassEstim/tInitialMass" value="$(arg initialMass)"/>
+
+		<param name="PositionForceControl/tIntegVelGain" value="0.3" />
+		<param name="PositionForceControl/tDerGainVelMode" value="4.0" />
+		<param name="PositionForceControl/tSatIntVelTerm" value="0.3" />
+		
+                <param name="PositionForceControl/tPropGain" value="7.5" />
+                <param name="PositionForceControl/tDerivGain" value="6.0" />
+                <param name="PositionForceControl/tIntegGain" value="3.0" />
+		
+		<param name="TrajectoryProcessorController/tTrajectoryModules" value='[]'/>
+		<param name="tTakeOffDestination" value="[0.0, 0.0, $(arg takeOffHeight)]"/>
+		<param name="tTakeOffVertically" value="true"/>
+		<param name="tLandDestinationHeight" value="$(arg landHeight)" />
+	</node>
+
+
+
+	<!-- MK -->
+	<node name="MKInterface_$(arg qcID)" pkg="tk_mkinterface" type="mkinterface">
+		<param name="MKInterface/tUavId" value="$(arg qcID)" />
+		<param name="MKInterface/tUavFirmware" value="$(arg firmware)" />
+		<param name="MKInterface/tInitialDriftEstim" value="true" />
+		<!-- <param name="MKInterface/tUavOffsetRawAccX" value="$(arg rawAccOffsetX)" />
+		<param name="MKInterface/tUavOffsetRawAccY" value="$(arg rawAccOffsetY)" /> -->
+		<param name="MKInterface/tUavOffsetRawAccX" value="510" />
+		<param name="MKInterface/tUavOffsetRawAccY" value="508" /> 
+		<param name="MKROSInterface/tCommandsTopic" value="/TeleKyb/$(arg qcID)/commands" />
+		<param name="MKROSInterface/tEmergencyLandService" value="/TeleKyb/TeleKybCore_$(arg qcID)/Behavior/EmergencyLand"/>
+		<param name="MKInterface/tEmergencyThrust" value="80" />
+
+		<!-- Serial -->
+		<param name="MKInterface/tSerialDeviceDirectory" value="/dev/serial/by-id" />
+		<param name="MKInterface/tSerialDeviceNameRegex" value="$(arg serial_device1)" />
+		<param name="MKInterfaceConnection/tBaudRate" value="BAUD115200" />
+	</node>
+
+
+
+	<!-- Experiment -->
+	<node name="tk_exp_cooperative_transportation" pkg="tk_exp_cooperative_transportation" type="tk_exp_cooperative_transportation">
+	      <param name="ExperimentOptions/robotID" value="$(arg qcID)" />
+	      <param name="ExperimentOptions/tJoystickTopic" value="/TeleKyb/tJoy/joy_exp" />
+	      <param name="ExperimentOptions/tUseMKInterface" value="true" />
+	</node>
+
+</launch>

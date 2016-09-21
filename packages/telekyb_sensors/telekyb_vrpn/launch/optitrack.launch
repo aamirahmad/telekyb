@@ -1,0 +1,16 @@
+<launch> 
+
+  	<!-- declare arguments to be passed in -->
+  	<arg name="qcID" /> 
+  	<arg name="serverIP"/>
+
+	<node name="telekyb_vrpn_$(arg qcID)" pkg="telekyb_vrpn" type="client_tracker"> 
+		<param name="tVRPNHostname" value="$(arg serverIP)" />
+		<param name="tChildFrameID" value="world" />
+		<param name="tEnableTF" value="true" />
+		<param name="tVRPNClientObjects" type="string" value="[Quadcopter_$(arg qcID)]" />
+		<!-- correct roation from x/z plane to East-North-Up convention -->
+		<param name="tVRPNRotationMatrix" type="string" value="[1.0,0.0,0.0, 0.0,0.0,-1.0, 0.0,1.0,0.0]" />
+		<remap from="/TeleKyb/telekyb_vrpn_$(arg qcID)/Quadcopter_$(arg qcID)" to="/TeleKyb/Vicon/Quadcopter_$(arg qcID)/Quadcopter_$(arg qcID)" />
+	</node>
+</launch>

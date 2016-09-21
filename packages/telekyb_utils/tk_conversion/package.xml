@@ -1,0 +1,38 @@
+<package>
+  <name>tk_conversion</name>
+  <version>3.0.0</version>
+  <description>tk_conversion</description>
+  <maintainer email="eugen.ruff@tuebingen.mpg.de">Eugen Ruff</maintainer>
+
+  <license>BSD</license>
+
+  <url type="website">http://ros.org/wiki/tk_conversion</url>
+  <!-- <url type="bugtracker"></url> -->
+
+  <author>Martin Riedel</author>
+
+  <!-- Dependencies which this package needs to build itself. -->
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <!-- Dependencies needed to compile this package. -->
+  <build_depend>roscpp</build_depend>
+  <build_depend>telekyb_base</build_depend>
+  <build_depend>telekyb_msgs</build_depend>
+  <build_depend>tk_haptics_msgs</build_depend>
+  <build_depend>yaml_cpp_wrapper</build_depend>
+  <build_depend>cmake_modules</build_depend>
+
+
+  <!-- Dependencies needed after this package is compiled. -->
+  <run_depend>roscpp</run_depend>
+  <run_depend>telekyb_base</run_depend>
+  <run_depend>telekyb_msgs</run_depend>
+  <run_depend>tk_haptics_msgs</run_depend>
+
+  <!-- Dependencies needed only for running tests. -->
+  <!-- <test_depend>roscpp</test_depend> -->
+  <!-- <test_depend>telekyb_base</test_depend> -->
+  <!-- <test_depend>telekyb_msgs</test_depend> -->
+  <!-- <test_depend>tk_haptics_msgs</test_depend> -->
+
+</package>

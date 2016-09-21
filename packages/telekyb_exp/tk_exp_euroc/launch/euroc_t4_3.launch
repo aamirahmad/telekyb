@@ -1,0 +1,100 @@
+<!-- -->
+
+<launch>
+	<!-- REQUIED by mk_interface -->
+	<arg name="qcID" value="0" />
+	<arg name="firmware" value="3908" />
+	<arg name="serial_device1" value ="usb-FTDI_FT232R_USB_UART_A900fRxi-if00-port0" />
+	<arg name="serial_device2" value ="usb-FTDI_FT232R_USB_UART_A900fQqb-if00-port0" />
+
+	<!-- REQUIED by telekyb_core -->
+	<arg name="rotortype" value="Quadcopter" />
+	<arg name="takeOffHeight" value="-0.5" />
+	<arg name="landHeight" value="-0.25" />
+	<arg name="initialMass" value="1.52" />
+	<arg name="emergencyThrust" value="60" />
+
+	<!-- Vicon -->
+	<!--node name="ViconEmulator_$(arg qcID)" pkg="telekyb_vicon_emulator" type="vicon_emulator" args="$(arg qcID)"/-->
+	
+	
+	<!-- telekyb core  -->
+	<node name="TeleKybCore_$(arg qcID)" pkg="telekyb_core" type="telekyb_core_node">
+		<param name="TeleKybCore/tRobotID" value="$(arg qcID)" />
+
+		<!--param name="StateEstimatorController/tPluginLookupName" value="state_estimators_plugin::ViconStateEstimator"/>
+		<param name="ViconStateEstimator/tKalmanPoseImuSeTopicName" value="/TeleKyb/Vicon/$(arg rotortype)_$(arg qcID)/$(arg rotortype)_$(arg qcID)" /-->
+
+		<!-- param name="StateEstimatorController/tPluginLookupName" value="state_estimators_plugin::KalmanPoseImuStateEstimator"/>
+		<param name="KalmanPoseImuStateEstimator/tKalmanPoseImuSeTopicName" value="/TeleKyb/Vicon/$(arg rotortype)_$(arg qcID)/$(arg rotortype)_$(arg qcID)" /-->
+		
+		
+<!-- 		<param name="StateEstimatorController/tPluginLookupName" value="state_estimators_plugin::EurocGroundTruthStateEstimator"/> -->
+<!-- 		<param name="EurocGroundTruthStateEstimator/tEurocGroundTruthSeTopicName" value="/firefly/ground_truth/pose" /> -->
+
+		<param name="StateEstimatorController/tPluginLookupName" value="state_estimators_plugin::EurocStateEstimator"/>
+		<param name="EurocStateEstimator/tEurocStateEstimatorSeTopicName" value="/firefly/filteredState" />
+
+		
+		<param name="TrajectoryController/tPluginLookupName" value="trajectory_trackers_plugin::EurocTrajectoryTracker"/>
+		<param name="EurocTrajectoryTracker/tCommandsTopic" value="/TeleKyb/$(arg qcID)/Commands" />
+		<param name="EurocTrajectoryTracker/tTaskNumber" value="31" />
+		
+		
+		
+<!--		<param name="PositionControl/tDerivGain" value="3.5" />
+		<param name="PositionControl/tPropGain" value="4.5" />
+		<param name="PositionControl/tIntegGain" value="1.1" />
+		<param name="PositionControl/tSatIntTerm" value="2.5" />-->
+		
+		
+		
+		
+		
+		<param name="PositionControl/tDerivGain" value="2.0" />
+		<param name="PositionControl/tPropGain" value="5.5" />
+		<param name="PositionControl/tIntegGain" value="0.8" />
+		<param name="PositionControl/tSatIntTerm" value="4.0" />
+		
+		<param name="PositionControl/tZPropGain" value="11.5" />
+		<param name="PositionControl/tZDerivGain" value="8.9" />
+		<param name="PositionControl/tGravity" value="9.8" />
+		
+		
+		
+		<param name="PositionControl/tDerGainVelMode" value="4.5" />
+		<param name="PositionControl/tIntegVelGain" value="0.9" />
+		
+		
+		<param name="StandardMassEstim/tInitialMass" value="$(arg initialMass)"/>
+		
+		<param name="TrajectoryProcessorController/tTrajectoryModules" value='[]'/>
+<!--		<param name="tCenterValueX" value="512" />
+		<param name="tCenterValueY" value="512" />-->
+		<param name="tTakeOffDestination" value="[0.0, 0.0, $(arg takeOffHeight)]"/>
+		<param name="tTakeOffVertically" value="false"/>
+		<param name="tLandDestinationHeight" value="$(arg landHeight)" />
+	</node>
+
+	<node name="stateFilter" pkg="tk_modelga" type="poseKalmanFilter">
+		<param name="tInitialZCoordinate" value="0.18"/>
+	</node>
+	
+	<node name="euroc_solution" pkg="euroc_solution_t3" type="euroc_solution_t3">
+	</node>
+
+	<!-- Experiment -->
+	<node name="exp_t4_3" pkg="tk_exp_euroc" type="exp_t4_3">
+	      <param name="ExperimentOptions/robotID" value="$(arg qcID)" />
+	      <param name="ExperimentOptions/tJoystickTopic" value="/TeleKyb/tJoy/joy_exp" />
+	      <param name="ExperimentOptions/tUseMKInterface" value="true" />
+	</node>
+	
+	<node pkg="path_planner_astar" type="planner_node" name="planner_astar_node" output="screen">
+		<param name="~mapfile" type="string" value="$(find euroc_solution_t4)/resource/power_plant.bt" />
+		<param name="~max_dt_dist" type="double" value="3.0" />
+		<param name="~pf_weight" type="double" value="1.0" />
+	</node>
+	
+
+</launch>

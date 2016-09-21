@@ -1,0 +1,14 @@
+<launch> 
+
+  	<!-- declare argumenta to be passed in -->
+  	<arg name="qcID" /> 
+  	<arg name="serverIP"/>
+
+	<node name="telekyb_vrpn_$(arg qcID)" pkg="telekyb_vrpn" type="client_tracker"> 
+		<param name="tVRPNHostname" value="$(arg serverIP)" />
+		<param name="tChildFrameID" value="world" />
+		<param name="tEnableTF" value="true" />
+		<param name="tVRPNClientObjects" type="string" value="[Quadcopter_$(arg qcID)]" />
+		<remap from="/TeleKyb/telekyb_vrpn/Quadcopter_$(arg qcID)" to="/TeleKyb/Vicon/Quadcopter_$(arg qcID)/Quadcopter_$(arg qcID)" />
+	</node>
+</launch>

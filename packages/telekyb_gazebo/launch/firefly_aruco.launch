@@ -1,0 +1,16 @@
+<!-- -->
+<launch>
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find telekyb_gazebo)/worlds/powerplant.world"/>
+    <!-- more default parameters can be changed here -->
+  </include>
+
+  <node name="tag110" pkg="gazebo_ros" type="spawn_model" args="-file $(find telekyb_gazebo)/urdf/ARUCOtag110.urdf -urdf -x 3.50 -y 1.80 -z 2 -R 0 -P 1.570796 -Y 0 -model ARUCOtag110" respawn="false" />
+
+  <node name="tag220" pkg="gazebo_ros" type="spawn_model" args="-file $(find telekyb_gazebo)/urdf/ARUCOtag220.urdf -urdf -x 2.20 -y 0.20 -z 1.5 -R 1.570796 -P 0 -Y 0.785398 -model ARUCOtag220" respawn="false" />
+
+  <node name="tag330" pkg="gazebo_ros" type="spawn_model" args="-file $(find telekyb_gazebo)/urdf/ARUCOtag330.urdf -urdf -x 1.50 -y 0.50 -z 1 -R 0 -P 0 -Y 0 -model ARUCOtag330" respawn="false" />
+  
+
+</launch>

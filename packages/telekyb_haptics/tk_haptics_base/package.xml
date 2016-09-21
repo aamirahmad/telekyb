@@ -1,0 +1,32 @@
+<package>
+  <name>tk_haptics_base</name>
+  <version>3.0.0</version>
+  <description>tk_haptics_base provides the Interface class for haptic devices.</description>
+  <maintainer email="eugen.ruff@tuebingen.mpg.de">Eugen Ruff</maintainer>
+
+  <license>BSD</license>
+
+  <url type="website">http://ros.org/wiki/tk_haptics_base</url>
+  <!-- <url type="bugtracker"></url> -->
+
+  <author>mriedel</author>
+
+  <!-- Dependencies which this package needs to build itself. -->
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <!-- Dependencies needed to compile this package. -->
+  <build_depend>roscpp</build_depend>
+  <build_depend>pluginlib</build_depend>
+  <build_depend>telekyb_defines</build_depend>
+  <build_depend>telekyb_base</build_depend>
+  <build_depend>tk_haptics_msgs</build_depend>
+  <build_depend>cmake_modules</build_depend>
+
+  <!-- Dependencies needed after this package is compiled. -->
+  <run_depend>roscpp</run_depend>
+  <run_depend>pluginlib</run_depend>
+  <run_depend>telekyb_defines</run_depend>
+  <run_depend>telekyb_base</run_depend>
+  <run_depend>tk_haptics_msgs</run_depend>
+
+</package>

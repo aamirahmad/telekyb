@@ -1,0 +1,50 @@
+<launch>
+	<arg name="qcID" value="5" />
+
+	<!-- Vicon via VRPN -->
+	<node name="Vicon" pkg="telekyb_vrpn" type="client_tracker">
+	      <param name="VRPNTrackerClient/tVRPNHostname" value="192.168.111.100"/>
+	      <param name="VRPNTrackerClient/tEnableTF" value="false"/>
+	      <param name="VRPNTrackerClient/tVRPNClientObjects" value="[Quadcopter_$(arg qcID)]"/>    
+	</node>
+
+	<!-- Joystick Logitech 510 Remapping OSX!-->
+	<node name="Joy510" pkg="telekyb_hid" type="tJoy">
+	      <param name="Joystick/tPubName" value="joy_exp" />
+	      <param name="Joystick/tButtonRemapping" value="[4,1,2,3,0,5,7,8,9,6]" />
+	      <param name="Joystick/tAxesRemapping" value="[3,2,1,0]" />
+	      <param name="Joystick/tAxisMultiplier" value="[1.0,-1.0,-1.0,1.0,1.0]" />
+	</node>
+
+	<!-- TeleKyb System -->
+	<node name="TeleKybSystem_$(arg qcID)" pkg="telekyb" type="telekyb_system">
+	      <param name="TeleKybSystem/tRobotID" value="$(arg qcID)" />
+	      <param name="StateEstimatorController/tPluginLookupName" value="tk_state/ViconStateEstimator"/>
+	      <param name="StateEstimatorController/tPublishRosTransform" value="true"/>
+	      <param name="ViconStateEstimator/tViconSeTopicName" value="/TeleKyb/Vicon/Quadcopter_$(arg qcID)" />
+	      <param name="TrajectoryController/tCommandsTopic" value="/TeleKyb/$(arg qcID)/commands" />
+	      <param name="PositionControl/tDerGainVelMode" value="12.5" />
+	      <param name="TrajectoryProcessorController/tTrajectoryModules" value='[]'/>
+	      <param name="TrajectoryController/tInitialMass" value="0.70"/>
+              <param name="tCenterValueX" value="512" />
+              <param name="tCenterValueY" value="512" />
+	</node>
+
+	<!-- MK -->
+	<node name="MKInterface_$(arg qcID)" pkg="tk_mkinterface" type="mkinterface">
+	      <param name="MKInterface/tUavId" value="$(arg qcID)" />
+	      <param name="MKInterface/tUavFirmware" value="1437" />
+	      <param name="MKInterface/tInitialDriftEstim" value="true" />
+	      <param name="MKInterfaceConnection/tBaudRate" value="BAUD115200" />
+	      <param name="MKROSInterface/tCommandsTopic" value="/TeleKyb/$(arg qcID)/commands" />
+	      <param name="MKROSInterface/tEmergencyLandService" value="/TeleKyb/TeleKybSystem_$(arg qcID)/Behavior/EmergencyLand"/>
+	</node>
+
+	<!-- Experiment -->
+	<node name="tk_calibrator" pkg="tk_mk_tools" type="tk_calibrator">
+	      <param name="CalibratorOptions/robotID" value="$(arg qcID)" />
+	      <param name="CalibratorOptions/tJoystickTopic" value="/TeleKyb/tJoy/joy_exp" />
+	      <param name="CalibratorOptions/tUseMKInterface" value="true" />
+	</node>
+
+</launch>

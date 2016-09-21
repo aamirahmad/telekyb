@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<package>
+  <name>tk_gazebo_interface</name>
+  <version>0.0.1</version>
+  <description>interface with gazebo hexarotor</description>
+  
+  <maintainer email="support-challenge03@robotics-challenges.eu">EuRoC Challenge 3 Team</maintainer>
+
+  <license>other</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  
+  <build_depend>geometry_msgs</build_depend>
+  <!-- build_depend>mav_msgs</build_depend -->
+  <build_depend>roscpp</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>telekyb_base</build_depend>
+  <build_depend>telekyb_msgs</build_depend>
+  <build_depend>mav_msgs</build_depend>
+  <build_depend>telekyb_interface</build_depend>
+  <build_depend>cmake_modules</build_depend>
+
+
+  <run_depend>geometry_msgs</run_depend>
+  <!-- run_depend>mav_msgs</run_depend -->
+  <run_depend>roscpp</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>telekyb_base</run_depend>
+  <run_depend>telekyb_msgs</run_depend>
+  <run_depend>telekyb_interface</run_depend>
+  <run_depend>mav_msgs</run_depend>
+</package>

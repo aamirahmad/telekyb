@@ -1,0 +1,27 @@
+<robot name="ARUCOtag220">
+  <link name="ARUCOtag220">
+    <inertial>
+      <origin xyz="0 0 0" /> 
+      <mass value="0.1" />
+      <inertia  ixx="1.0" ixy="0.0"  ixz="0.0"  iyy="1.0"  iyz="0.0"  izz="1.0" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.20 0.20 0" />
+
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.20 0.20 0.005" />
+      </geometry>
+    </collision>
+  </link>
+  <gazebo reference="ARUCOtag220">
+    <material>arucotag220</material>
+    <turnGravityOff>false</turnGravityOff>
+    <static>true</static>
+  </gazebo>
+</robot>
