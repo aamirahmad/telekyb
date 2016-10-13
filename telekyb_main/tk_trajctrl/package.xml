@@ -1,0 +1,54 @@
+<package>
+  <name>tk_trajctrl</name>
+  <version>1.0.0</version>
+  <description>tk_trajctrl implements the actual controller. Contains PositionControl, YawControl and MassEstimation.</description>
+  <maintainer email="antonio.franchi@tuebingen.mpg.de">Dr. Antonio Franchi and Martin Riedel</maintainer>
+
+  <license>BSD</license>
+
+  <url type="website">http://ros.org/wiki/tk_trajctrl</url>
+  
+
+  <author>Dr. Antonio Franchi and Martin Riedel</author>
+
+  
+  <buildtool_depend>catkin</buildtool_depend>
+
+  
+  <build_depend>roscpp</build_depend>
+  <build_depend>telekyb_defines</build_depend>
+  <build_depend>telekyb_base</build_depend>
+  <build_depend>tk_ctrlalgo</build_depend>
+  <build_depend>telekyb_msgs</build_depend>
+  <build_depend>tk_param_estimator</build_depend>
+  <build_depend>tk_state</build_depend>
+  <build_depend>tk_draft_msgs</build_depend>
+  <build_depend>cmake_modules</build_depend>
+
+  
+  <run_depend>roscpp</run_depend>
+  <run_depend>telekyb_defines</run_depend>
+  <run_depend>telekyb_base</run_depend>
+  <run_depend>telekyb_msgs</run_depend>
+  <run_depend>tk_ctrlalgo</run_depend>
+  <run_depend>tk_param_estimator</run_depend>
+  <run_depend>tk_state</run_depend>
+  <run_depend>tk_draft_msgs</run_depend>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+<export>
+</export>
+
+<!--This file was altered by an automated script. Trying to alter xml files to 
+fullfill the requirements for the catkin hydro standart in ros. This means there 
+maight be some tags which do not make sense I did my best to guess the correct answers.  -->
+</package>

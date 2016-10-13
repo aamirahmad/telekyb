@@ -1,0 +1,13 @@
+# Add Folders
+
+add_subdirectory(obs_avoidance)
+
+add_subdirectory(obs_detection)
+
+add_subdirectory(obs_providers)
+
+
+rosbuild_add_executable(obstacle_provider 
+	Main.cpp
+)
+target_link_libraries(obstacle_provider obs_detection)

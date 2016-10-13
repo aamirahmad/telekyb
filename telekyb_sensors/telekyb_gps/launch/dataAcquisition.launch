@@ -1,0 +1,7 @@
+<!-- -->
+
+<launch>
+  <node name="convertSphericalToCartesian" pkg="tk_sensors" type="convertSphericalToCartesian" />
+  <node name="path" pkg="tk_mbasile" type="pathChecker" />
+  <node pkg="rosbag" type="record" name="record" output="screen" args="-a -o /home/mbasile/Repositories/humus-sw/TeleKyb2/trunk/stacks/telekyb_users/tk_mbasile/bagFiles/"/> 
+</launch>

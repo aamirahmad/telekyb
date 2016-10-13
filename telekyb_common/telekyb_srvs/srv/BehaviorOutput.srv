@@ -1,0 +1,4 @@
+# Returns Name and ID of an Behavior
+---
+uint64 behaviorID
+string behaviorName

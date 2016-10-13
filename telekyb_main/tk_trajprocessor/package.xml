@@ -1,0 +1,51 @@
+<package>
+  <name>tk_trajprocessor</name>
+  <version>1.0.0</version>
+  <description>tk_trajprocessor is the module of the Telekyb_System to process Trajectories given by the BehaviorController. Modules are ros Plugins that are loaded at runtime.</description>
+  <maintainer email="antonio.franchi@tuebingen.mpg.de">Martin Riedel</maintainer>
+
+  <license>BSD</license>
+
+  <url type="website">http://ros.org/wiki/tk_trajprocessor</url>
+  
+
+  <author>Martin Riedel</author>
+
+  
+  <buildtool_depend>catkin</buildtool_depend>
+
+  
+  <build_depend>roscpp</build_depend>
+  <build_depend>telekyb_defines</build_depend>
+  <build_depend>telekyb_base</build_depend>
+  <build_depend>pluginlib</build_depend>
+  <build_depend>telekyb_msgs</build_depend>
+  <build_depend>telekyb_srvs</build_depend>
+  <build_depend>tk_state</build_depend>
+  <build_depend>tk_trajctrl</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <!--build_depend>odeint</build_depend -->
+  <build_depend>tk_obstacle</build_depend>
+  <build_depend>cmake_modules</build_depend>
+
+  
+  <run_depend>roscpp</run_depend>
+  <run_depend>telekyb_defines</run_depend>
+  <run_depend>telekyb_base</run_depend>
+  <run_depend>pluginlib</run_depend>
+  <run_depend>telekyb_msgs</run_depend>
+  <run_depend>telekyb_srvs</run_depend>
+  <run_depend>tk_state</run_depend>
+  <run_depend>tk_trajctrl</run_depend>
+  <!-- run_depend>odeint</run_depend -->
+  <run_depend>tk_obstacle</run_depend>
+  <run_depend>geometry_msgs</run_depend>
+  
+
+<export>
+</export>
+
+<!--This file was altered by an automated script. 
+Trying to alter xml files to fullfill the requirements for the catkin hydro standart in ros. 
+This means there maight be some tags which do not make sense I did my best to guess the correct answers.  -->
+</package>

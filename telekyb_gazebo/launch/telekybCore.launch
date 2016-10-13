@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<launch>
+
+	<arg name="qcID" />
+	<arg name="robot_name"/>
+	<arg name="takeOffHeight" />
+	<arg name="landHeight" />
+	<arg name="initialMass" />
+	<arg name="rotortype" />
+	<arg name="output" />
+        <arg name="emergencyThrust"/>
+
+	<arg name="debug" default="false" />
+	<arg name="debugPrefix" value="gdb -ex run - -args" if="$(arg debug)" />
+	<arg name="debugPrefix" value="" unless="$(arg debug)" />
+
+
+        <!-- telekyb core  -->
+        <node name="TeleKybCore_$(arg qcID)" pkg="telekyb_core" type="telekyb_core_node" output="$(arg output)" launch-prefix="$(arg debugPrefix)" >
+                <param name="TeleKybCore/tRobotID" value="$(arg qcID)" />
+                <!-- param name="StateEstimatorController/tPluginLookupName" value="state_estimators_plugin::KalmanPoseImuStateEstimator"/>
+                <param name="KalmanPoseImuStateEstimator/tKalmanPoseImuSeTopicName" value="/TeleKyb/Vicon/$(arg rotortype)_$(arg qcID)/$(arg rotortype)_$(arg qcID)" /-->
+
+                <param name="StateEstimatorController/tPublishRosTransform" value="false"/>
+
+
+                <param name="StateEstimatorController/tPluginLookupName" value="state_estimators_plugin::EurocGroundTruthStateEstimator"/>
+                <param name="StateEstimatorController/tTransformParentID" value="/world" />
+                <param name="StateEstimatorController/tPublishRosTransformStamped" value="True" />
+
+                <param name="EurocGroundTruthStateEstimator/tEurocGroundTruthSeTopicName" value="/$(arg robot_name)_$(arg qcID)/ground_truth/pose" />
+                <param name="EurocGroundTruthStateEstimator/tEurocGroundTruthUseFrame_id" value="True" />
+                <param name="EurocGroundTruthStateEstimator/tEurocGroundTruthFrame_id" value="/world" />
+
+                <!-- <param name="StateEstimatorController/tPluginLookupName" value="state_estimators_plugin::EurocStateEstimator"/>
+                <param name="EurocStateEstimator/tEurocStateEstimatorSeTopicName" value="$(arg robot_name)/filteredState" />-->
+
+
+                <param name="TrajectoryController/tPluginLookupName" value="trajectory_trackers_plugin::EurocTrajectoryTracker"/>
+                <param name="EurocTrajectoryTracker/tCommandsTopic" value="/TeleKyb/$(arg qcID)/Commands" />
+                <param name="EurocTrajectoryTracker/tTaskNumber" value="31" />
+
+
+                <param name="PositionControl/tDerivGain" value="2.3" />
+                <param name="PositionControl/tXDerivGain" value="1.0" />
+                <param name="PositionControl/tYDerivGain" value=".9" />
+                <param name="PositionControl/tPropGain" value="3.5" />
+                <param name="PositionControl/tXPropGain" value="0.65" />
+
+                <param name="PositionControl/tYPropGain" value="0.8" />
+                <param name="PositionControl/tIntegGain" value="2.2" />
+                <param name="PositionControl/tXIntegGain" value="0.8" />
+                <param name="PositionControl/tYIntegGain" value="0.8" />
+                <param name="PositionControl/tSatIntTerm" value="1.0" />
+
+                <param name="PositionControl/tZPropGain" value="25.5" />
+                <param name="PositionControl/tZDerivGain" value="11.9" />
+                <param name="PositionControl/tZIntegGain" value="9.0" />
+                <param name="PositionControl/tGravity" value="9.8" />
+
+
+
+                <param name="PositionControl/tDerGainVelMode" value="1" />
+                <param name="PositionControl/tIntegVelGain" value="1.5" />
+                <param name="PositionControl/tSatIntVelTerm" value="1.5" />
+
+                <param name="StandardMassEstim/tInitialMass" value="$(arg initialMass)"/>
+
+                <param name="TrajectoryProcessorController/tTrajectoryModules" value='[]'/>
+                <!--<param name="tCenterValueX" value="512" />
+                <param name="tCenterValueY" value="512" />-->
+                <param name="tTakeOffDestination" value="[0.0, 0.0, $(arg takeOffHeight)]"/>
+                <param name="tTakeOffVertically" value="false"/>
+                <param name="tLandDestinationHeight" value="$(arg landHeight)" />
+        </node>
+
+</launch>

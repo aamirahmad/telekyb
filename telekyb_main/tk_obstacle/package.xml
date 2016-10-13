@@ -1,0 +1,46 @@
+<package>
+  <name>tk_obstacle</name>
+  <version>1.0.0</version>
+  <description>tk_obstacle contains Obstacle Detection. (in form of loadable Obstacle Detection Module). 
+     But Library also contains the Algorithms for Obstacle Avoidance.</description>
+  <maintainer email="antonio.franchi@tuebingen.mpg.de">Martin Riedel</maintainer>
+
+  <license>BSD</license>
+
+  <url type="website">http://ros.org/wiki/tk_obstacle</url>
+  
+
+  <author>Martin Riedel</author>
+
+  
+  <buildtool_depend>catkin</buildtool_depend>
+
+  
+  <build_depend>roscpp</build_depend>
+  <build_depend>telekyb_base</build_depend>
+  <build_depend>telekyb_calculus</build_depend>
+  <build_depend>pluginlib</build_depend>
+  <build_depend>cmake_modules</build_depend>
+
+  
+  <run_depend>roscpp</run_depend>
+  <run_depend>telekyb_base</run_depend>
+  <run_depend>telekyb_calculus</run_depend>
+  <run_depend>pluginlib</run_depend>
+
+  
+  
+  
+  
+  
+
+<export>
+    <cpp cflags="-I${prefix}/include" lflags="-Wl,-rpath,${prefix}/lib -L${prefix}/lib -lobs_avoidance" />
+    <tk_obstacle plugin="${prefix}/obsdetection_plugins.xml" />
+</export>
+
+<!--This file was altered by an automated script. 
+Trying to alter xml files to fullfill the requirements for the catkin hydro 
+standart in ros. This means there maight be some tags which do 
+not make sense I did my best to guess the correct answers.  -->
+</package>

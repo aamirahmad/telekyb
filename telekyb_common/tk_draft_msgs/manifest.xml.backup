@@ -1,0 +1,15 @@
+<package>
+  <description brief="tk_draft_msgs">
+
+     tk_draft_msgs contains messages that are still under development or not intented for permanent use.
+
+  </description>
+  <author>Martin Riedel</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/tk_draft_msgs</url>
+  <depend package="telekyb_msgs"/>
+
+</package>
+
+

@@ -1,0 +1,27 @@
+#
+# Copyright 2015  Burak Yueksel and Carlo Masone   
+#
+# This file is part of TeleKyb.
+#
+# TeleKyb is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# TeleKyb is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with TeleKyb. If not, see <http://www.gnu.org/licenses/>.
+
+Header header
+
+# Input Pos
+geometry_msgs/Vector3 zeroDer
+geometry_msgs/Vector3 firstDer
+geometry_msgs/Vector3 secondDer
+geometry_msgs/Vector3 thirdDer
+geometry_msgs/Vector3 fourthDer
+geometry_msgs/Vector3 fifthDer

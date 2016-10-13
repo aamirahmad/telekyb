@@ -1,0 +1,16 @@
+<package>
+  <description brief="telekyb_msgs">
+
+     telekyb_msgs contains custom messages used throughout the telekyb stack.
+
+  </description>
+  <author>Dr. Antonio Franchi and Martin Riedel</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/telekyb_msgs</url>
+  <depend package="std_msgs"/>
+  <depend package="geometry_msgs"/>
+
+</package>
+
+

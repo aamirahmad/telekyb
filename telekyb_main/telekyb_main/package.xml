@@ -1,0 +1,31 @@
+<package>
+  <name>telekyb_main</name>
+  <version>3.0.0</version>
+  <description>telekyb_algo</description>
+  <maintainer email="martin.riedel@tuebingen.mpg.de">Maintained by Martin Riedel</maintainer>
+
+  <license>BSD</license>
+
+  <url type="website">http://ros.org/wiki/telekyb_algo</url>
+  
+
+  <author>Maintained by Martin Riedel</author>
+
+  
+  <buildtool_depend>catkin</buildtool_depend>
+
+  
+  <run_depend>telekyb_interface</run_depend>
+  <run_depend>telekyb_core</run_depend>
+  <run_depend>tk_trajprocessor</run_depend>
+  <run_depend>tk_behavior</run_depend>
+  <run_depend>tk_exception</run_depend>
+  <run_depend>tk_state</run_depend>
+  <run_depend>tk_trajctrl</run_depend>
+  <run_depend>tk_obstacle</run_depend>
+
+
+ <export>
+   <metapackage />
+ </export>
+</package>

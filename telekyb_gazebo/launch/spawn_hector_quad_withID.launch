@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<launch> 
+
+  
+  <!-- Spawn simulated quadrotor uav -->
+  <include file="$(find hector_quadrotor_gazebo)/launch/spawn_quadrotor.launch" >
+<!--    <arg name="model" value="$(find hector_quadrotor_description)/urdf/quadrotor_hokuyo_utm30lx.gazebo.xacro"/>--> 
+<!--     <arg name="tf_prefix" value="$(optenv ROS_NAMESPACE)/hector_quad_1/"/> -->
+    <arg name="x" value="0.0"/>
+    <arg name="y" value="0.0"/>
+    <arg name="z" value="0.8"/>
+  </include>
+
+  </launch>

@@ -1,0 +1,35 @@
+<package>
+  <name>telekyb_joystick</name>
+  <version>3.0.0</version>
+  <description>telekyb_joystick maps joystick input into ROS. Using linux/joystick.h. For mac support see telekyb_hid</description>
+  <maintainer email="eugen.ruff@tuebingen.mpg.de">Eugen Ruff</maintainer>
+
+  <license>BSD</license>
+
+  <url type="website">http://ros.org/wiki/telekyb_joystick</url>
+  <!-- <url type="bugtracker"></url> -->
+
+  <author>Martin Riedel</author>
+
+  <!-- Dependencies which this package needs to build itself. -->
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <!-- Dependencies needed to compile this package. -->
+  <build_depend>roscpp</build_depend>
+  <build_depend>telekyb_defines</build_depend>
+  <build_depend>telekyb_base</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+
+  <!-- Dependencies needed after this package is compiled. -->
+  <run_depend>roscpp</run_depend>
+  <run_depend>telekyb_defines</run_depend>
+  <run_depend>telekyb_base</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+
+  <!-- Dependencies needed only for running tests. -->
+  <!-- <test_depend>roscpp</test_depend> -->
+  <!-- <test_depend>telekyb_defines</test_depend> -->
+  <!-- <test_depend>telekyb_base</test_depend> -->
+  <!-- <test_depend>sensor_msgs</test_depend> -->
+
+</package>

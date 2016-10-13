@@ -1,0 +1,38 @@
+#ifndef TRO_ROBSC_DEFINES_HPP
+#define TRO_ROBSC_DEFINES_HPP
+
+#include <telekyb_defines/telekyb_defines.hpp>
+#include <telekyb_defines/telekyb_enums.hpp>
+
+#include <telekyb_base/Spaces.hpp>
+
+namespace TELEKYB_NAMESPACE {
+
+struct RoBSCInput {
+    // Control Mode
+    PosControlType CtrlMode;
+	// Current State
+	Position3D curPosition; // (x,y,z)
+    Velocity3D curLinVelocity; // (dx,dy,dz)
+    RotAngle3D curOrientation; // (0,1,2) -> (roll = x, pitch = y, yaw = z)
+    AngVelocity3D curAngVelocity; // (0,1,2) -> (omega_x = x, omega_y = y, omega_z = z)
+
+	// Desired State
+    Position3D desPosition;     // (x_ref,y_ref,z_ref)
+    Velocity3D desLinVelocity;  // (dx_ref,dy_ref,dz_ref)
+    Acceleration3D desAcceleration;  // (ddx_ref,ddy_ref,ddz_ref)	
+    RotAngle3D desOrientation;    // (0,1,2) -> (roll_ref,pitch_ref,yaw_ref)
+};
+
+struct RoBSCOutput {
+
+    // Transmission into Motor Speed
+    Vector4D motorBuf; // Nominal motor speed square Vector 4x1
+    Eigen::Matrix<double, 6, 1, Eigen::DontAlign> motorBuf_Hex; // motor speed vector 6x1 for Hexacopter in EuRoC Challenge
+//    Vector4D NominalForce;
+    Matrix3D Trajectory_Reference;
+};
+
+}
+
+#endif /* TRO_ROBSC_DEFINES_HPP */

@@ -1,0 +1,11 @@
+<!-- -->
+<launch>
+
+      <remap from="/firefly_2/xtion/depth/camera_info" to="/camera/depth/camera_info"/>
+    <remap from="/firefly_2/xtion/depth/image_raw" to="/camera/depth/image_raw"/>
+    <remap from="/firefly_2/xtion/depth/points" to="/camera/depth/points"/>
+    <remap from="/firefly_2/xtion/rgb/camera_info" to="/camera/rgb/camera_info"/>
+    <remap from="/firefly_2/xtion/rgb/image_raw" to="/camera/rgb/image_raw"/> 
+
+    
+</launch>

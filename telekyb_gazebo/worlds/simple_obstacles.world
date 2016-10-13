@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<sdf version="1.4">
+  <world name="default">
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    
+    <model name="obstacle">
+      <static>true</static>
+      <pose>2.5 0.25 0.75 0 0 0</pose>
+      <link name="box">
+        <collision name="collision">
+          <geometry>  
+            <box>
+              <size>0.75 0.75 1.5</size>
+            </box>
+          </geometry>  
+        </collision>
+        <visual name="visual">
+          <geometry>  
+            <box>
+              <size>0.75 0.75 1.5</size>
+            </box> 
+          </geometry> 
+        </visual>
+      </link>
+    </model>
+  </world>
+</sdf>

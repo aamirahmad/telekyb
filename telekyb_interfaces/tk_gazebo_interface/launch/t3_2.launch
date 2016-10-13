@@ -1,0 +1,98 @@
+<!-- -->
+
+<launch>
+	<!-- REQUIED by mk_interface -->
+	<arg name="qcID" value="0" />
+	<arg name="firmware" value="3908" />
+	<arg name="serial_device1" value ="usb-FTDI_FT232R_USB_UART_A900fRxi-if00-port0" />
+	<arg name="serial_device2" value ="usb-FTDI_FT232R_USB_UART_A900fQqb-if00-port0" />
+
+	<!-- REQUIED by telekyb_core -->
+	<arg name="rotortype" value="Quadcopter" />
+	<arg name="takeOffHeight" value="-0.5" />
+	<arg name="landHeight" value="-0.25" />
+	<arg name="initialMass" value="1.52" />
+	<arg name="emergencyThrust" value="60" />
+
+	<!-- Vicon -->
+	<!--node name="ViconEmulator_$(arg qcID)" pkg="telekyb_vicon_emulator" type="vicon_emulator" args="$(arg qcID)"/-->
+	
+	
+	<!-- telekyb core  -->
+	<node name="TeleKybCore_$(arg qcID)" pkg="telekyb_core" type="telekyb_core_node">
+		<param name="TeleKybCore/tRobotID" value="$(arg qcID)" />
+
+		<!--param name="StateEstimatorController/tPluginLookupName" value="state_estimators_plugin::ViconStateEstimator"/>
+		<param name="ViconStateEstimator/tKalmanPoseImuSeTopicName" value="/TeleKyb/Vicon/$(arg rotortype)_$(arg qcID)/$(arg rotortype)_$(arg qcID)" /-->
+
+		<!-- param name="StateEstimatorController/tPluginLookupName" value="state_estimators_plugin::KalmanPoseImuStateEstimator"/>
+		<param name="KalmanPoseImuStateEstimator/tKalmanPoseImuSeTopicName" value="/TeleKyb/Vicon/$(arg rotortype)_$(arg qcID)/$(arg rotortype)_$(arg qcID)" /-->
+
+		<param name="StateEstimatorController/tPublishRosTransform" value="false"/>
+		
+		
+<!-- 		<param name="StateEstimatorController/tPluginLookupName" value="state_estimators_plugin::EurocGroundTruthStateEstimator"/> -->
+<!-- 		<param name="EurocGroundTruthStateEstimator/tEurocGroundTruthSeTopicName" value="/firefly/ground_truth/pose" /> -->
+
+		<param name="StateEstimatorController/tPluginLookupName" value="state_estimators_plugin::EurocStateEstimator"/>
+		<param name="EurocStateEstimator/tEurocStateEstimatorSeTopicName" value="/firefly/filteredState" />
+
+		
+		<param name="TrajectoryController/tPluginLookupName" value="trajectory_trackers_plugin::EurocTrajectoryTracker"/>
+		<param name="EurocTrajectoryTracker/tCommandsTopic" value="/TeleKyb/$(arg qcID)/Commands" />
+		<param name="EurocTrajectoryTracker/tTaskNumber" value="32" />
+		
+		<param name="PositionControl/tDerivGain" value="2.2" />
+		<param name="PositionControl/tXDerivGain" value="1.1" />
+		<param name="PositionControl/tYDerivGain" value="1.1" />
+		<param name="PositionControl/tPropGain" value="6.5" />
+		<param name="PositionControl/tXPropGain" value="0.9" />
+		<param name="PositionControl/tYPropGain" value="0.9" />
+		<param name="PositionControl/tIntegGain" value="1.5" />
+		<param name="PositionControl/tXIntegGain" value="0.9" />
+		<param name="PositionControl/tYIntegGain" value="0.9" />
+		<param name="PositionControl/tSatIntTerm" value="3.0" />
+		
+		
+		
+		<param name="PositionControl/tZPropGain" value="12.5" />
+		<param name="PositionControl/tZDerivGain" value="8.9" />
+		<param name="PositionControl/tZIntegGain" value="1.0" />
+		<param name="PositionControl/tGravity" value="9.8" />
+		
+		
+		<param name="PositionControl/tDerGainVelMode" value="6" />
+		<param name="PositionControl/tIntegVelGain" value="1.5" />
+		
+		<param name="StandardMassEstim/tInitialMass" value="$(arg initialMass)"/>
+		
+		<param name="TrajectoryProcessorController/tTrajectoryModules" value='[]'/>
+<!--		<param name="tCenterValueX" value="512" />
+		<param name="tCenterValueY" value="512" />-->
+		<param name="tTakeOffDestination" value="[0.0, 0.0, $(arg takeOffHeight)]"/>
+		<param name="tTakeOffVertically" value="false"/>
+		<param name="tLandDestinationHeight" value="$(arg landHeight)" />
+	</node>
+
+	<node name="stateFilter" pkg="tk_modelga" type="poseKalmanFilter">
+		<param name="tInitialZCoordinate" value="0.08"/>
+	</node>
+	
+	<node name="forceEstimator" pkg="tk_srajappa" type="ForceEstimator">
+	</node>
+
+	<node name="euroc_solution" pkg="tk_gazebo_interface" type="tk_gazebo_interface">
+ 	       <param name="robotName" value="firefly" />
+ 	       <param name="robotID" value="$(arg qcID)" />
+	</node>
+
+	<!-- Experiment -->
+	<node name="exp_t3_1" pkg="tk_exp_euroc" type="exp_t3_1">
+	      <param name="ExperimentOptions/robotID" value="$(arg qcID)" />
+	      <param name="ExperimentOptions/tJoystickTopic" value="/TeleKyb/tJoy/joy_exp" />
+	      <param name="ExperimentOptions/tUseMKInterface" value="true" />
+	</node>
+
+	
+
+</launch>

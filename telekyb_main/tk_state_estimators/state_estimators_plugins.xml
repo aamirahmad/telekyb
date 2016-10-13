@@ -1,0 +1,29 @@
+<library path="lib/libstate_estimators_plugin">
+  <!-- Vicon -->
+  <class type="state_estimators_plugin::ViconStateEstimator" base_class_type="telekyb::StateEstimator">
+    <description>State Estimation from Vicon. Generates TKState Msg.</description>
+  </class>
+  <!-- EuRoC - Kalman filtered pose1 sensor + pose2 sensor + imu -->
+  <class type="state_estimators_plugin::KalmanPoseImuStateEstimator" base_class_type="telekyb::StateEstimator">
+    <description>State Estimation from Vicon. Generates TKState Msg.</description>
+  </class>
+  <!-- EuRoC - Kalman filtered pose1 sensor + pose2 sensor + imu using ground truth -->
+  <class type="state_estimators_plugin::EurocGroundTruthStateEstimator" base_class_type="telekyb::StateEstimator">
+    <description>State Estimation from Vicon. Generates TKState Msg.</description>
+  </class>
+  <!-- EuRoC - Kalman filtered pose1 sensor + pose2 sensor + imu -->
+  <class type="state_estimators_plugin::EurocStateEstimator" base_class_type="telekyb::StateEstimator">
+    <description>State Estimation from Vicon. Generates TKState Msg.</description>
+  </class>
+  <!-- directly pass on the correct topic the filtered received value -->
+  <class type="state_estimators_plugin::PassThroughStateEstimator" base_class_type="telekyb::StateEstimator">
+    <description>State Estimation from Vicon. Generates TKState Msg.</description>
+  </class>
+    <class type="state_estimators_plugin::FlowImuStateEstimator" base_class_type="telekyb::StateEstimator">
+    <description>State Estimation from Flow and Imu using a Kalman Filter. Generates TKState Msg.</description>
+  </class>
+  <!-- Complementary estimator using VICON+IMU -->
+<!--  <class type="state_estimators_plugin::ComplementaryStateEstimator" base_class_type="telekyb::StateEstimator">
+    <description>State Estimation from Vicon and IMU. Generates TKState Msg.</description>
+  </class>-->
+</library>

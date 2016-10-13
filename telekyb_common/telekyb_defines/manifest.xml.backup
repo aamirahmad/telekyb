@@ -1,0 +1,18 @@
+<package>
+  <description brief="telekyb_defines">
+
+     telekyb_defines contains header definition that are used throughout the telekyb scope. Also contains compiled
+     Definitions of Operators etc.
+
+  </description>
+  <author>Dr. Antonio Franchi and Martin Riedel</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/telekyb_defines</url>
+  <export>
+    <cpp cflags="-I${prefix}/include" lflags="-Wl,-rpath,${prefix}/lib -L${prefix}/lib -ltelekyb_defines" />
+  </export>
+
+</package>
+
+
