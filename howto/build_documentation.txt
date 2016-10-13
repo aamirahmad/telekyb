@@ -1,3 +1,0 @@
-$ cd ~/telekyb_ws/src/doc
-$ doxygen
-$ firefox doxygen/html/index.html

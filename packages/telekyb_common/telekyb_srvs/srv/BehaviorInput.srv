@@ -1,4 +1,0 @@
-# Input Name and/or ID of a active Behavior
-uint64 behaviorID
-string behaviorName
----

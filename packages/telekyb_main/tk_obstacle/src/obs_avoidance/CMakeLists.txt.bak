@@ -1,7 +1,0 @@
-# Obstacle Avoidance Algorithms
-
-set(ObsAvoidSRCS
-	ObstacleAvoidancePotential.cpp
-)
-
-rosbuild_add_library(obs_avoidance ${ObsAvoidSRCS})

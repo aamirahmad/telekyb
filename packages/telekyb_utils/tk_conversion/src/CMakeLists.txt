@@ -1,5 +1,0 @@
-# Objects
-# Build programs
-rosbuild_add_executable(state2pose TKStateToStampedPose.cpp)
-#rosbuild_add_executable(transform2pose TransformStampedToStampedPose.cpp)
-rosbuild_add_executable(haptic2vector TKHapticOutputToVector3Stamped.cpp)

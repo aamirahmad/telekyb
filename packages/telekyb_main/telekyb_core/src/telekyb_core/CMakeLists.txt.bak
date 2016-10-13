@@ -1,9 +1,0 @@
-
-# Build utils
-
-rosbuild_add_executable(${PROJECT_NAME}
-	Main.cpp
-	TeleKybCore.cpp
-	TeleKybCoreInterface.cpp
-	TeleKybCoreOptions.cpp
-)

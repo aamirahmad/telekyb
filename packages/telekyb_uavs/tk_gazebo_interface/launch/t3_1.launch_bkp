@@ -1,8 +1,0 @@
-<launch>
-  <group ns="firefly">
-    
-    <!-- Launch your nodes here. Extend / adapt for the subtask at hand, if necessary. --> 
-    
-    <node name="euroc_solution_t3" pkg="euroc_solution_t3" type="euroc_solution_t3" output="screen"/>
-  </group>
-</launch>
