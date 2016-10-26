@@ -11,8 +11,9 @@ if (DEFINED $ENV{YAMLCPP_ROOT})
         set(YAMLCPP_ROOT $ENV{YAMLCPP_ROOT})
 endif()
 
+
 find_package(YamlCpp REQUIRED)
-find_package(catkin REQUIRED COMPONENTS roscpp telekyb_base telekyb_defines telekyb_msgs tk_trajctrl tk_trajprocessor tk_behavior tk_state sensor_msgs cmake_modules)
+find_package(catkin REQUIRED COMPONENTS roscpp telekyb_base telekyb_defines telekyb_msgs tk_trajctrl tk_trajprocessor tk_behavior tk_state sensor_msgs cmake_modules dynamic_reconfigure)
 find_package(Boost QUIET REQUIRED COMPONENTS system thread)
 find_package(Eigen REQUIRED)
 #set(EIGEN3_INCLUDE_DIRS $ENV{EIGEN3_INCLUDE_DIR})
@@ -26,6 +27,11 @@ find_package(Eigen REQUIRED)
 #ENDIF()
 
 #MESSAGE(FATAL_ERROR ${PROJECT_SOURCE_DIR}/include/telekyb_base/Options/)
+
+
+generate_dynamic_reconfigure_options(
+  cfg/UAVcontrolParameters.cfg
+)
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
