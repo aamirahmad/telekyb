@@ -7,17 +7,18 @@
 
 #include <telekyb_core/TeleKybCore.hpp>
 #include <telekyb_core/UAVcontrolParametersConfig.h>
+#include <dynamic_reconfigure/server.h>
 
 #include <telekyb_base/TeleKyb.hpp>
 #include <ros/ros.h>
 
 // main
 
-float positionControl_tDerivGain;
+double positionControl_tDerivGain;
 
-void reconf_callback(TeleKybCore::UAVcontrolParametersConfig &config, uint32_t level)
+void reconf_callback(telekyb_core::UAVcontrolParametersConfig &config, uint32_t level)
 {
-    positionControl_tDerivGain = config.positionControl_tDerivGain;
+   
 }
 
 int main(int argc, char **argv) {
@@ -28,8 +29,8 @@ int main(int argc, char **argv) {
 
 	telekyb::TeleKybCore* core = new telekyb::TeleKybCore();
 	
-	dynamic_reconfigure::Server<TeleKybCore::UAVcontrolParametersConfig> server;
-	dynamic_reconfigure::Server<TeleKybCore::UAVcontrolParametersConfig>::CallbackType f;
+	dynamic_reconfigure::Server<telekyb_core::UAVcontrolParametersConfig> server;
+	dynamic_reconfigure::Server<telekyb_core::UAVcontrolParametersConfig>::CallbackType f;
 	f = boost::bind(&reconf_callback, _1, _2);
 	server.setCallback(f);	
 

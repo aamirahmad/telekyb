@@ -26,7 +26,7 @@
 // ros
 #include <ros/ros.h>
 #include <dynamic_reconfigure/server.h>
-
+#include <telekyb_core/TeleKybCore.hpp>
 
 namespace TELEKYB_NAMESPACE {
 

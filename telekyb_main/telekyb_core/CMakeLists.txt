@@ -69,12 +69,15 @@ if(Boost_FOUND)
 ENDIF()
 
 
+
 add_executable(telekyb_core_node
 	src/telekyb_core/Main.cpp
 	src/telekyb_core/TeleKybCore.cpp
 	src/telekyb_core/TeleKybCoreInterface.cpp
 	src/telekyb_core/TeleKybCoreOptions.cpp
 )
+
+add_dependencies(telekyb_core_node ${PROJECT_NAME}_gencfg)
 
 target_link_libraries(telekyb_core_node
         ${Boost_LIBRARIES}

@@ -167,7 +167,7 @@ void PositionControl::run(const TKTrajectory& input, const TKState& currentState
     if (input.xAxisCtrl == PosControlType::Position) {
         // 		std::cout << "A" << std::endl;
         //std::cout << options.tXPropGain->getValue() << " " << options.tXDerivGain->getValue() << " " << options.tXIntegGain->getValue() << std::endl;
-        //std::cout << options.tPropGain->getValue() << " " << options.tDerivGain->getValue() << " " << options.tIntegGain->getValue() << std::endl;
+        std::cout << options.tPropGain->getValue() << " " << options.tDerivGain->getValue() << " " << options.tIntegGain->getValue() << std::endl;
         xPropGain   = options.tPropGain->getValue()*options.tXPropGain->getValue();
         xDerivGain  = options.tDerivGain->getValue()*options.tXDerivGain->getValue();
         xIntegGain  = options.tIntegGain->getValue()*options.tXIntegGain->getValue();
