@@ -8,6 +8,7 @@
 #ifndef POSITIONCONTROL_HPP_
 #define POSITIONCONTROL_HPP_
 
+#include <ros/ros.h>
 #include <ros/console.h>    
 #include <tf/tf.h>
 
@@ -24,6 +25,8 @@
 
 #include <tk_ctrlalgo/PosCtrlDefines.hpp>
 #include <telekyb_base/Messages.hpp>
+
+#include <dynamic_reconfigure/Config.h>
 
 namespace TELEKYB_NAMESPACE {
 
@@ -71,6 +74,10 @@ private:
 
 	//double mass;
 	double xIntErr, yIntErr, zIntErr, xIntVelErr, yIntVelErr, zIntVelErr, yawRateErr;
+	double PropGainFlex, DerivGainFlex, IntegGainFlex;
+	double xPropGainFlex, yPropGainFlex, zPropGainFlex;
+	double xIntegGainFlex, yIntegGainFlex, zIntegGainFlex;
+	double xDerivGainFlex, yDerivGainFlex, zDerivGainFlex;	
 	
 	// temp variables
 	FILE * fileTemp1;
@@ -83,8 +90,10 @@ private:
 	Timer integTimer;
 	//XXX: this is not good practice since it might accidentally report accs of the wrong vehicle!
 //	ros::Publisher accPublisher;
+	tf::TransformListener tfListener;
+	
+	ros::Subscriber sub_paramServer;
 	ros::NodeHandle mainNodehandle;
-    tf::TransformListener tfListener;
 
 public:
 	// gravity is provided by
@@ -93,6 +102,9 @@ public:
 
 	void run(const TKTrajectory& input, const TKState& currentState, const double mass, PosCtrlOutput& output);
 	//void setMass(double mass_);
+	
+	void pid_params_callback(const dynamic_reconfigure::Config&);
+	
 };
 
 }

@@ -4,12 +4,14 @@
  *  Created on: Oct 27, 2011
  *      Author: mriedel
  */
-
+#include <telekyb_base/ROS.hpp>
 #include <tk_ctrlalgo/PositionControl.hpp>
 #include <algorithm>
 #include <geometry_msgs/Vector3.h>
+#include <dynamic_reconfigure/Config.h>
 
 #include <telekyb_defines/physic_defines.hpp>
+
 
 #define MAX_INT_TIME_STEP 0.04
 
@@ -53,6 +55,21 @@ PositionControlOptions::PositionControlOptions()
     //				"Publish commanded accelerations", false, false, true);
 }
 
+
+void PositionControl::pid_params_callback(const dynamic_reconfigure::Config& msg){
+  // Handle the updated pid params
+  
+  	 PropGainFlex = msg.doubles[0].value; DerivGainFlex  = msg.doubles[1].value; IntegGainFlex = msg.doubles[2].value;
+	 
+	 xPropGainFlex = msg.doubles[3].value; yPropGainFlex = msg.doubles[4].value; zPropGainFlex = msg.doubles[5].value;
+	 
+	 xIntegGainFlex = msg.doubles[6].value; yIntegGainFlex = msg.doubles[7].value; zIntegGainFlex = msg.doubles[8].value;
+	 
+	 xDerivGainFlex = msg.doubles[9].value; yDerivGainFlex = msg.doubles[10].value; zDerivGainFlex = msg.doubles[11].value;	
+  
+}
+
+
 PositionControl::PositionControl() {
     time = 0.0;
     xIntErr = 0.0;
@@ -67,6 +84,12 @@ PositionControl::PositionControl() {
     fileTemp2 = NULL;
     //XXX: this is not good practice since it might accidentally report accs of the wrong vehicle!
     //  accPublisher = mainNodehandle.advertise<geometry_msgs::Vector3>("/TeleKyb/TeleKybCore_7/comAcc", 1);
+    mainNodehandle = TELEKYB_NAMESPACE::ROSModule::Instance().getMainNodeHandle();
+    
+    
+    sub_paramServer = mainNodehandle.subscribe("/uavPidParamServer/parameter_updates",10,&PositionControl::pid_params_callback, this);
+    
+    
     if( ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Info) ) {
         ros::console::notifyLoggerLevelsChanged();
     }
@@ -160,18 +183,25 @@ void PositionControl::run(const TKTrajectory& input, const TKState& currentState
     ROS_DEBUG_STREAM("curOrientation " << curOrientation(0) << " " << curOrientation(1) << " " << curOrientation(2));
 
     double xPropGain = 0.0, yPropGain = 0.0, zPropGain = 0.0;
-    double xIntegGain = 0.0, yIntegGain = 0.0, xIntegVelGain = 0.0, yIntegVelGain = 0.0, zIntegVelGain = 0.0, zIntegGain = 0.0;
+    double xIntegGain = 0.0, yIntegGain = 0.0, zIntegGain = 0.0;
+    double xIntegVelGain = 0.0, yIntegVelGain = 0.0, zIntegVelGain = 0.0;
     double xDerivGain = 0.0, yDerivGain = 0.0, zDerivGain = 0.0;
 
-
+    //std::cout << PropGainFlex << " " << DerivGainFlex << " " << IntegGainFlex << std::endl;
+    
     if (input.xAxisCtrl == PosControlType::Position) {
+        //std::cout << " We have position control "<<std::endl;
         // 		std::cout << "A" << std::endl;
-        //std::cout << options.tXPropGain->getValue() << " " << options.tXDerivGain->getValue() << " " << options.tXIntegGain->getValue() << std::endl;
-        std::cout << options.tPropGain->getValue() << " " << options.tDerivGain->getValue() << " " << options.tIntegGain->getValue() << std::endl;
-        xPropGain   = options.tPropGain->getValue()*options.tXPropGain->getValue();
-        xDerivGain  = options.tDerivGain->getValue()*options.tXDerivGain->getValue();
-        xIntegGain  = options.tIntegGain->getValue()*options.tXIntegGain->getValue();
+        //std::cout << options.tPropGain->getValue() << " " << options.tDerivGain->getValue() << " " << options.tIntegGain->getValue() << std::endl;
+//         xPropGain   = options.tPropGain->getValue()*options.tXPropGain->getValue();
+//         xDerivGain  = options.tDerivGain->getValue()*options.tXDerivGain->getValue();
+//         xIntegGain  = options.tIntegGain->getValue()*options.tXIntegGain->getValue();
+	
+        xPropGain   = PropGainFlex*xPropGainFlex;
+        xDerivGain  = DerivGainFlex*xDerivGainFlex;
+        xIntegGain  = IntegGainFlex*xIntegGainFlex;	
     } else if (input.xAxisCtrl == PosControlType::Velocity) {
+      //std::cout << " We have velocity control "<<std::endl;
         //		xPropGain   = 0.0;
         // 		std::cout << "B" << std::endl;
         xDerivGain  = options.tDerGainVelMode->getValue();
@@ -179,6 +209,7 @@ void PositionControl::run(const TKTrajectory& input, const TKState& currentState
         //		xIntegGain  = 0.0;
         xIntErr = 0.0;
     } else if (input.xAxisCtrl == PosControlType::Acceleration) {
+      //std::cout << " We have acceleration control "<<std::endl;
         // 		std::cout << "C" << std::endl;
         //		xPropGain   = 0.0;
         //		xDerivGain  = 0.0;
@@ -188,9 +219,12 @@ void PositionControl::run(const TKTrajectory& input, const TKState& currentState
 
     if (input.yAxisCtrl == PosControlType::Position) {
         // 		std::cout << "A1" << std::endl;
-        yPropGain   = options.tPropGain->getValue()*options.tYPropGain->getValue();
-        yDerivGain  = options.tDerivGain->getValue()*options.tYDerivGain->getValue();
-        yIntegGain  = options.tIntegGain->getValue()*options.tYIntegGain->getValue();
+//         yPropGain   = options.tPropGain->getValue()*options.tYPropGain->getValue();
+//         yDerivGain  = options.tDerivGain->getValue()*options.tYDerivGain->getValue();
+//         yIntegGain  = options.tIntegGain->getValue()*options.tYIntegGain->getValue();
+        yPropGain   = PropGainFlex*yPropGainFlex;
+        yDerivGain  = DerivGainFlex*yDerivGainFlex;
+        yIntegGain  = IntegGainFlex*yIntegGainFlex;	      
     } else if (input.yAxisCtrl == PosControlType::Velocity) {
         //		yPropGain   = 0.0;
         // 		std::cout << "B1" << std::endl;
@@ -207,9 +241,12 @@ void PositionControl::run(const TKTrajectory& input, const TKState& currentState
 
     if (input.zAxisCtrl == PosControlType::Position) {
         // 		std::cout << "A2" << std::endl;
-        zIntegGain  = options.tZIntegGain->getValue();
-        zPropGain  = options.tZPropGain->getValue();
-        zDerivGain = options.tZDerivGain->getValue();
+//         zIntegGain  = options.tZIntegGain->getValue();
+//         zPropGain  = options.tZPropGain->getValue();
+//         zDerivGain = options.tZDerivGain->getValue();
+        zPropGain   = zPropGainFlex;
+        zDerivGain  = zDerivGainFlex;
+        zIntegGain  = zIntegGainFlex;	      
     } else if (input.zAxisCtrl == PosControlType::Velocity) {
         //		zPropGain  = 0.0;
         // 		std::cout << "B2" << std::endl;
