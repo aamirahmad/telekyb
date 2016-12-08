@@ -1,5 +1,6 @@
 #include <ros/ros.h>
 #include <std_srvs/Empty.h>
+#include <std_msgs/Int8.h>
 
 #include <sensor_msgs/Imu.h>
 #include <geometry_msgs/PoseWithCovarianceStamped.h>
@@ -20,6 +21,7 @@ ros::Timer vicon_timer;
 
 geometry_msgs::PoseStamped vicmsg;
 bool viconPublished;
+int nmpcActive = 0;
 
 void imuCallback(const sensor_msgs::ImuConstPtr& msg){
   // Handle IMU data.
@@ -54,7 +56,12 @@ void tk_commandsCallback(const telekyb_msgs::TKCommands::ConstPtr& msg){
     output_msg.pitch = -msg->pitch; // pitch angle  [rad]
     output_msg.yaw_rate = -msg->yaw; // yaw rate around z-axis [rad/s]
     output_msg.thrust = -msg->thrust; // thrust [N]
-    command_pub.publish(output_msg);
+    
+    if(nmpcActive==0)
+    {
+      std::cout<<"we have no NMPC"<<std::endl;
+      command_pub.publish(output_msg);
+    }
 }
 
 void tk_motorCommandsCallback(const telekyb_msgs::TKMotorCommands::ConstPtr& msg){
@@ -71,6 +78,11 @@ void tk_motorCommandsCallback(const telekyb_msgs::TKMotorCommands::ConstPtr& msg
     motor_command_pub.publish(output_msg);
 }
 
+
+void nmpcActivityCallback(const std_msgs::Int8::ConstPtr& msg)
+{
+  nmpcActive = msg->data;
+}
 
 int main(int argc, char** argv){
 
@@ -146,7 +158,10 @@ std::cout << "robotNamespace " << robotNamespace << std::endl;
   ROS_DEBUG_STREAM("tk gazebo interface::main motorCommandTopic " << motorCommandTopic.str());
   ros::Subscriber tk_motor_command = nh.subscribe(motorCommandTopic.str(), 10, &tk_motorCommandsCallback);
 
-
+  std::stringstream nmpcActivityTopic;
+  nmpcActivityTopic << "/firefly_1/NMPCActive";
+  ROS_DEBUG_STREAM("tk gazebo interface::main nmpcActivityTopic " << nmpcActivityTopic.str());
+  ros::Subscriber sub_nmpc_activity = nh.subscribe(nmpcActivityTopic.str(), 1000, &nmpcActivityCallback);
 
 
 
