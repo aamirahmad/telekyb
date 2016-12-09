@@ -59,7 +59,7 @@ void tk_commandsCallback(const telekyb_msgs::TKCommands::ConstPtr& msg){
     
     if(nmpcActive==0)
     {
-      std::cout<<"we have no NMPC"<<std::endl;
+      //std::cout<<"we have no NMPC"<<std::endl;
       command_pub.publish(output_msg);
     }
 }
