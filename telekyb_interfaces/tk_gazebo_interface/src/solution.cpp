@@ -57,11 +57,11 @@ void tk_commandsCallback(const telekyb_msgs::TKCommands::ConstPtr& msg){
     output_msg.yaw_rate = -msg->yaw; // yaw rate around z-axis [rad/s]
     output_msg.thrust = -msg->thrust; // thrust [N]
     
-    if(nmpcActive==0)
-    {
+    //if(nmpcActive==0)
+    //{
       //std::cout<<"we have no NMPC"<<std::endl;
       command_pub.publish(output_msg);
-    }
+    //}
 }
 
 void tk_motorCommandsCallback(const telekyb_msgs::TKMotorCommands::ConstPtr& msg){
