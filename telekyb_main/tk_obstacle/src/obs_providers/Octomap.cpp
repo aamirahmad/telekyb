@@ -76,28 +76,49 @@ void Octomap::getObstaclePoints(const TKState& lastState, std::vector<Position3D
 {
   double ray = options.tNeighboroudRay->getValue();
   
-  double newRes = res*4.0;
+  double newRes = res*1.0;
   
   double xq = lastState.position(0);
   double yq = -lastState.position(1);
   double zq = -lastState.position(2);
   double x, y, z;
-  for (x = xq-ray; x<=xq+ray; x+=newRes){
-    for (y = yq-ray; y<=yq+ray; y+=newRes){
-      for (z = zq-ray; z<=zq+ray; z+=newRes){
+//   for (x = xq-ray; x<=xq+ray; x+=newRes){
+//     for (y = yq-ray; y<=yq+ray; y+=newRes){
+//       for (z = zq-ray; z<=zq+ray; z+=newRes){
+// 	if (x>xmin && x<xmax && y>ymin && y<ymax && z>zmin && z<zmax) {
+// 	  point3d query(x, y, z);
+// 	  OcTreeNode* result = octree->search (query);
+// 	  if (result != NULL) {
+// 	    if (result->getOccupancy()>0.3){
+//  	      //std::cout << "found obstacle " << query << ":\t " << result->getOccupancy() << std::endl;
+// 	      obstaclePoints.push_back(Position3D(x,-y,-z)/*-Position3D(xq, yq, zq)*/);
+// 	    }
+// 	  }
+// 	}
+//       }
+//     }
+//   }
+  
+  for (x = xq-2; x<=xq+2; x+=newRes){
+    for (y = yq-2; y<=yq+2; y+=newRes){
+      for (z = 0.2; z<=1.1; z+=newRes){
 	if (x>xmin && x<xmax && y>ymin && y<ymax && z>zmin && z<zmax) {
 	  point3d query(x, y, z);
 	  OcTreeNode* result = octree->search (query);
 	  if (result != NULL) {
 	    if (result->getOccupancy()>0.3){
  	      //std::cout << "found obstacle " << query << ":\t " << result->getOccupancy() << std::endl;
-	      obstaclePoints.push_back(Position3D(x,-y,-z)/*-Position3D(xq, yq, zq)*/);
+	      obstaclePoints.push_back(Position3D(x,y,z)/*-Position3D(xq, yq, zq)*/);
 	    }
 	  }
 	}
       }
     }
-  }
+  }  
+  
+  
+  
+  
 //   obstaclePoints.push_back(Position3D(0.0,0.0,0));
 }
 
