@@ -5,9 +5,9 @@
 #include <geometry_msgs/PoseWithCovarianceStamped.h>
 #include <geometry_msgs/PoseStamped.h>
 
-#include <mav_msgs/CommandAttitudeThrust.h>
-#include <mav_msgs/CommandRateThrust.h>
-#include <mav_msgs/CommandMotorSpeed.h>
+#include <mav_msgs_tk/CommandAttitudeThrust.h>
+#include <mav_msgs_tk/CommandRateThrust.h>
+#include <mav_msgs_tk/CommandMotorSpeed.h>
 
 #include <telekyb_msgs/TKCommands.h>
 #include <telekyb_msgs/TKMotorCommands.h>
@@ -48,7 +48,7 @@ void tk_commandsCallback(const telekyb_msgs::TKCommands::ConstPtr& msg){
   // Handle tk_commands: translate them in eurocmsgs and publish them.
 
     // Example for using the attitude controller:
-    mav_msgs::CommandAttitudeThrust output_msg;
+    mav_msgs_tk::CommandAttitudeThrust output_msg;
     output_msg.header = msg->header; // use the latest information you have.
     output_msg.roll = msg->roll; // roll angle [rad]
     output_msg.pitch = -msg->pitch; // pitch angle  [rad]
@@ -60,7 +60,7 @@ void tk_commandsCallback(const telekyb_msgs::TKCommands::ConstPtr& msg){
 void tk_motorCommandsCallback(const telekyb_msgs::TKMotorCommands::ConstPtr& msg){
   // Handle tk_commands: translate them in eurocmsgs and publish them.
     // Example for using the motor controller:
-    mav_msgs::CommandMotorSpeed output_msg;
+    mav_msgs_tk::CommandMotorSpeed output_msg;
     output_msg.header = msg->header; // use the latest information you have.
     output_msg.motor_speed.push_back(msg->force[0]); // roll angle [rad]
     output_msg.motor_speed.push_back(msg->force[1]); // pitch angle  [rad]
@@ -101,13 +101,13 @@ std::cout << "robotNamespace " << robotNamespace << std::endl;
   commandAttitudeTopic << "/" << robotNamespace << "/command/attitude";
   ROS_DEBUG_STREAM("commandAttitudeTopic " << commandAttitudeTopic.str());
   // Chose one of the versions below. The first of these topic published determines the control mode.
-  command_pub = nh.advertise<mav_msgs::CommandAttitudeThrust>(commandAttitudeTopic.str(), 10);
-  //ros::Publisher command_pub = nh.advertise<mav_msgs::CommandRateThrust>("command/rate", 10);
+  command_pub = nh.advertise<mav_msgs_tk::CommandAttitudeThrust>(commandAttitudeTopic.str(), 10);
+  //ros::Publisher command_pub = nh.advertise<mav_msgs_tk::CommandRateThrust>("command/rate", 10);
 
   std::stringstream commandMotorsTopic;
   commandMotorsTopic  << "/" << robotNamespace << "/command/motors";
   ROS_DEBUG_STREAM("commandMotorsTopic " << commandMotorsTopic.str());
-  motor_command_pub = nh.advertise<mav_msgs::CommandMotorSpeed>(commandMotorsTopic.str(), 10);
+  motor_command_pub = nh.advertise<mav_msgs_tk::CommandMotorSpeed>(commandMotorsTopic.str(), 10);
 
 
   std::stringstream viconTopic;

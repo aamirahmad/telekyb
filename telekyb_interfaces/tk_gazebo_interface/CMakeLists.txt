@@ -11,7 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   cmake_modules
 )
 
-find_package(mav_msgs QUIET)
+find_package(mav_msgs_tk QUIET)
 
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
