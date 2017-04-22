@@ -24,7 +24,7 @@ add_service_files(FILES
 generate_messages(DEPENDENCIES telekyb_msgs)
 
 catkin_package(
-    CATKIN_DEPENDS  message_runtime telekyb_msgs
+    CATKIN_DEPENDS  message_runtime telekyb_msgs message_generation
 )
 
 
